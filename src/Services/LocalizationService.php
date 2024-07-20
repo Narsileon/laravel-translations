@@ -4,6 +4,7 @@ namespace Narsil\Localization\Services;
 
 #region USE
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
@@ -25,11 +26,13 @@ final class LocalizationService
      */
     public static function getTranslations(): array
     {
-        $languageId = Language::locale()->{Language::ID};
+        $locale = App::getLocale();
 
-        return Cache::rememberForever("narsil:translations:$languageId", function () use ($languageId)
+        return Cache::rememberForever("narsil:translations:$locale", function ()
         {
-            $dictionaryEntries = Translation::dictionary($languageId)->get();
+            $language = Language::locale();
+
+            $dictionaryEntries = Translation::dictionary($language->{Language::ID})->get();
 
             $translations = [];
 
