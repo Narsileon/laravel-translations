@@ -1,0 +1,136 @@
+<?php
+
+namespace Narsil\Localizations\Models;
+
+#region USE
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\App;
+
+#endregion
+
+/**
+ * @version 1.0.0
+ *
+ * @author Jonathan Rigaux
+ */
+class Translation extends Model
+{
+    #region CONSTRUCTOR
+
+    /**
+     * @param array $attributes
+     *
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->table = self::TABLE;
+
+        $this->fillable = [
+            self::ACTIVE,
+            self::DEFAULT_VALUE,
+            self::KEY,
+        ];
+
+        $this->with = [
+            self::RELATIONSHIP_VALUE,
+        ];
+
+        parent::__construct($attributes);
+    }
+
+    #endregion
+
+    #region CONSTANTS
+
+    /**
+     * @var string
+     */
+    final public const ACTIVE = 'active';
+    /**
+     * @var string
+     */
+    final public const ID = 'id';
+    /**
+     * @var string
+     */
+    final public const DEFAULT_VALUE = 'default_value';
+    /**
+     * @var string
+     */
+    final public const KEY = 'key';
+
+    /**
+     * @var string
+     */
+    final public const RELATIONSHIP_VALUE = 'value';
+    /**
+     * @var string
+     */
+    final public const RELATIONSHIP_VALUES = 'values';
+
+    /**
+     * @var string
+     */
+    final public const TABLE = 'translations';
+
+    #endregion
+
+    #region RELATIONSHIP
+
+    /**
+     * @return HasOne
+     */
+    final public function value(): HasOne
+    {
+        return $this->hasOne(
+            TranslationValue::class,
+            TranslationValue::KEY_ID,
+            self::ID
+        )->whereHas(TranslationValue::RELATIONSHIP_LANGUAGE, function ($query)
+        {
+            $query->where(Language::LOCALE, '=', App::getLocale());
+        });
+    }
+
+    /**
+     * @return HasMany
+     */
+    final public function values(): HasMany
+    {
+        return $this->hasMany(
+            TranslationValue::class,
+            TranslationValue::KEY_ID,
+            self::ID
+        );
+    }
+
+    #endregion
+
+    #region SCOPES
+
+    /**
+     * @param Builder $query
+     *
+     * @return void
+     */
+    final public function scopeDictionary(Builder $query, int $languageId): void
+    {
+        $query
+            ->with([self::RELATIONSHIP_VALUES => function ($query) use ($languageId)
+            {
+                $query->where(TranslationValue::LANGUAGE_ID, '=', $languageId);
+            }])
+            ->where(self::ACTIVE, '=', true)
+            ->select([
+                self::ID,
+                self::KEY,
+            ]);
+    }
+
+    #endregion
+}
