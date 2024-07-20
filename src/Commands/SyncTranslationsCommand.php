@@ -4,6 +4,7 @@ namespace Narsil\Localization\Commands;
 
 #region USE
 
+use Database\Seeders\LocalizationSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
@@ -39,7 +40,7 @@ class SyncTranslationsCommand extends Command
     public function handle(): void
     {
         Artisan::call('db:seed', [
-            '--class' => 'LocalizationSeeder',
+            '--class' => LocalizationSeeder::class,
             '--force' => true,
         ]);
 
