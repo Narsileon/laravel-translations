@@ -80,7 +80,11 @@ class Language extends Model
     final public function scopeOptions(Builder $query): void
     {
         $query
-            ->select(self::ID, self::LANGUAGE, self::LOCALE)
+            ->select([
+                self::ID,
+                self::LANGUAGE,
+                self::LOCALE,
+            ])
             ->where(self::ACTIVE, true);
     }
 
