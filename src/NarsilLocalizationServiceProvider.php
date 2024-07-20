@@ -90,7 +90,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
      */
     private function bootTranslations(): void
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'narsil');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'narsil-localization');
     }
 
     #endregion
