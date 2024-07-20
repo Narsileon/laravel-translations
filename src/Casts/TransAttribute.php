@@ -6,7 +6,9 @@ namespace Narsil\Localization\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Models\TranslationValue;
 
@@ -67,9 +69,12 @@ final class TransAttribute implements CastsAttributes
             return $value ?? '';
         }
 
-        $translation = $translation->{Translation::RELATIONSHIP_VALUE}?->{TranslationValue::VALUE} ?? $translation->{Translation::DEFAULT_VALUE} ?? '';
+        $translationValue = $translation->{Translation::RELATIONSHIP_VALUES}?->first(function ($value)
+        {
+            return $value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE} === App::getLocale();
+        });
 
-        return $translation;
+        return $translationValue?->{TranslationValue::VALUE} ?? $translation->{Translation::DEFAULT_VALUE} ?? '';
     }
 
     /**

@@ -7,8 +7,6 @@ namespace Narsil\Localization\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Facades\App;
 
 #endregion
 
@@ -67,10 +65,6 @@ class Translation extends Model
     /**
      * @var string
      */
-    final public const RELATIONSHIP_VALUE = 'value';
-    /**
-     * @var string
-     */
     final public const RELATIONSHIP_VALUES = 'values';
 
     /**
@@ -81,17 +75,6 @@ class Translation extends Model
     #endregion
 
     #region RELATIONSHIP
-
-    /**
-     * @return HasOne
-     */
-    final public function value(): HasOne
-    {
-        return $this->{self::RELATIONSHIP_VALUES}->whereHas(TranslationValue::RELATIONSHIP_LANGUAGE, function ($query)
-        {
-            $query->where(Language::LOCALE, '=', App::getLocale());
-        });
-    }
 
     /**
      * @return HasMany

@@ -32,15 +32,20 @@ final class LocalizationService
         {
             $language = Language::locale();
 
-            $dictionaryEntries = Translation::dictionary($language->{Language::ID})->get();
+            $dictionary = Translation::dictionary($language->{Language::ID})->get();
 
             $translations = [];
 
-            foreach ($dictionaryEntries as $directionaryEntry)
+            foreach ($dictionary as $translation)
             {
-                $translations[$directionaryEntry->{Translation::KEY}] = [
-                    Translation::ID => $directionaryEntry->{Translation::ID},
-                    Translation::RELATIONSHIP_VALUE => $directionaryEntry->{Translation::RELATIONSHIP_VALUE}?->{TranslationValue::VALUE},
+                $translationValue = $translation->{Translation::RELATIONSHIP_VALUES}?->first(function ($value) use ($locale)
+                {
+                    return $value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE} === $locale;
+                });
+
+                $translations[$translation->{Translation::KEY}] = [
+                    Translation::ID => $translation->{Translation::ID},
+                    TranslationValue::VALUE => $translationValue?->{TranslationValue::VALUE} ?? $translation->{Translation::DEFAULT_VALUE},
                 ];
             }
 
@@ -57,7 +62,7 @@ final class LocalizationService
     {
         $translations = LocalizationService::getTranslations();
 
-        $value = $translations[$key][Translation::RELATIONSHIP_VALUE] ?? $key;
+        $value = $translations[$key][TranslationValue::VALUE] ?? $key;
 
         return $value;
     }
