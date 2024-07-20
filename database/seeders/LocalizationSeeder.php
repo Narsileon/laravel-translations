@@ -126,7 +126,8 @@ final class LocalizationSeeder extends Seeder
 
         foreach ($keys as $key)
         {
-            $path = array_pop(explode('::', $key));
+            $parts = explode('::', $key);
+            $path = array_pop($parts);
 
             $phpTranslations += $this->flatTranslations(Lang::get($key, [], $locale), $path);
         }
