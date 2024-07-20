@@ -85,14 +85,19 @@ final class LocalizationSeeder extends Seeder
     }
 
     /**
-     * @param array<string,mixed> $translations
+     * @param array<string,mixed>|string $translations
      * @param string $path
      * @param array<string,string> $flattenedTranslations
      *
      * @return array
      */
-    private function flatTranslations(array $translations, string $path, array $flattenedTranslations = []): array
+    private function flatTranslations(array|string $translations, string $path, array $flattenedTranslations = []): array
     {
+        if (is_string($translations))
+        {
+            return [];
+        }
+
         foreach ($translations as $key => $value)
         {
             if (is_array($value))
