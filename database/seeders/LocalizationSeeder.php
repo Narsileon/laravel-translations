@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
+use Narsil\Localization\Enums\LocaleEnum;
 use Narsil\Localization\Interfaces\ITranslationRepository;
 use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
@@ -31,11 +32,7 @@ final class LocalizationSeeder extends Seeder
     {
         app(ITranslationRepository::class)->flush();
 
-        $locales = Config::get('narsil.locales', [
-            'de',
-            'en',
-            'fr',
-        ]);
+        $locales = Config::get('narsil.locales', LocaleEnum::cases());
 
         foreach ($locales as $locale)
         {

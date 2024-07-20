@@ -1,7 +1,13 @@
 <?php
 
+#region USE
+
+use Narsil\Localization\Enums\LocaleEnum;
+
+#endregion
+
 return [
-    'de' => 'German',
-    'en' => 'English',
-    'fr' => 'French',
+    LocaleEnum::DE->value => 'German',
+    LocaleEnum::EN->value => 'English',
+    LocaleEnum::FR->value => 'French',
 ];
