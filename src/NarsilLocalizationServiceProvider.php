@@ -31,6 +31,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
         $this->bootCommands();
         $this->bootMigrations();
         $this->bootRoutes();
+        $this->bootTranslations();
     }
 
     /**
@@ -82,6 +83,14 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
     private function bootRoutes(): void
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+    }
+
+    /**
+     * @return void
+     */
+    private function bootTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'narsil');
     }
 
     #endregion
