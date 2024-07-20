@@ -38,9 +38,9 @@ final class LocalizationService
 
             foreach ($dictionary as $translation)
             {
-                $translationValue = $translation->{Translation::RELATIONSHIP_VALUES}?->first(function ($value) use ($locale)
+                $translationValue = $translation->{Translation::RELATIONSHIP_VALUES}?->first(function ($value) use ($language)
                 {
-                    return $value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE} === $locale;
+                    return $value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE} === $language->{Language::LOCALE};
                 });
 
                 $translations[$translation->{Translation::KEY}] = [
