@@ -3,9 +3,10 @@
 	"description": "Narsil Localization",
 	"license": "MIT",
 	"keywords": [
-		"narsil",
 		"laravel",
 		"localization",
+		"narsil",
+		"react",
 		"translations"
 	],
 	"authors": [
