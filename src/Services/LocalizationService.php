@@ -1,6 +1,6 @@
 <?php
 
-namespace Narsil\NarsilFramework\Services;
+namespace Narsil\Localization\Services;
 
 #region USE
 
