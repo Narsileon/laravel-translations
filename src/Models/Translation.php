@@ -1,6 +1,6 @@
 <?php
 
-namespace Narsil\Localizations\Models;
+namespace Narsil\Localization\Models;
 
 #region USE
 

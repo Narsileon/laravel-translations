@@ -1,11 +1,11 @@
 <?php
 
-namespace Narsil\Localizations\Blueprints;
+namespace Narsil\Localization\Blueprints;
 
 #region USE
 
 use Illuminate\Database\Schema\Blueprint;
-use Narsil\Localizations\Models\Translation;
+use Narsil\Localization\Models\Translation;
 
 #endregion
 

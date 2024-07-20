@@ -1,13 +1,13 @@
 <?php
 
-namespace Narsil\NarsilFramework;
+namespace Narsil\Localizations;
 
 #region USE
 
 use Illuminate\Support\ServiceProvider;
-use Narsil\Localizations\Commands\SyncTranslationsCommand;
-use Narsil\Localizations\Interfaces\ITranslationRepository;
-use Narsil\NarsilFramework\Repositories\TranslationRepository;
+use Narsil\Localization\Commands\SyncTranslationsCommand;
+use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Repositories\TranslationRepository;
 
 #endregion
 
@@ -16,7 +16,7 @@ use Narsil\NarsilFramework\Repositories\TranslationRepository;
  *
  * @author Jonathan Rigaux
  */
-final class NarsilFrameworkServiceProvider extends ServiceProvider
+final class NarsilLocalizationServiceProvider extends ServiceProvider
 {
     #region PUBLIC METHODS
 

@@ -6,9 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
-use Narsil\Localizations\Models\Language;
-use Narsil\Localizations\Models\Translation;
-use Narsil\Localizations\Models\TranslationValue;
+use Narsil\Localization\Models\Language;
+use Narsil\Localization\Models\Translation;
+use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 

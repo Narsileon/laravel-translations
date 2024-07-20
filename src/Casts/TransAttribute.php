@@ -1,14 +1,14 @@
 <?php
 
-namespace Narsil\NarsilFramework\Casts;
+namespace Narsil\Localization\Casts;
 
 #region USE
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Narsil\Localizations\Interfaces\ITranslationRepository;
-use Narsil\Localizations\Models\Translation;
-use Narsil\Localizations\Models\TranslationValue;
+use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\Translation;
+use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 

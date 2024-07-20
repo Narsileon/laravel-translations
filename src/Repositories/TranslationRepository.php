@@ -1,13 +1,13 @@
 <?php
 
-namespace Narsil\NarsilFramework\Repositories;
+namespace Narsil\Localization\Repositories;
 
 #region USE
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
-use Narsil\Localizations\Interfaces\ITranslationRepository;
-use Narsil\Localizations\Models\Translation;
+use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\Translation;
 
 #endregion
 

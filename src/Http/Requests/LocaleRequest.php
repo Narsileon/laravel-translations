@@ -1,11 +1,11 @@
 <?php
 
-namespace Narsil\Localizations\Http\Requests;
+namespace Narsil\Localization\Http\Requests;
 
 #region USE
 
 use Illuminate\Foundation\Http\FormRequest;
-use Narsil\Localizations\Models\Language;
+use Narsil\Localization\Models\Language;
 
 #endregion
 

@@ -8,10 +8,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
-use Narsil\Localizations\Interfaces\ITranslationRepository;
-use Narsil\Localizations\Models\Language;
-use Narsil\Localizations\Models\Translation;
-use Narsil\Localizations\Models\TranslationValue;
+use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\Language;
+use Narsil\Localization\Models\Translation;
+use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 

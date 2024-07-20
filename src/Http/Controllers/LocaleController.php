@@ -1,14 +1,14 @@
 <?php
 
-namespace Narsil\Localizations\Http\Controllers;
+namespace Narsil\Localization\Http\Controllers;
 
 #region USE
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
-use Narsil\Localizations\Http\Requests\LocaleRequest;
-use Narsil\Localizations\Models\Language;
+use Narsil\Localization\Http\Requests\LocaleRequest;
+use Narsil\Localization\Models\Language;
 
 #endregion
 

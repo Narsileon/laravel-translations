@@ -3,7 +3,7 @@
 #region USE
 
 use Illuminate\Support\Facades\Route;
-use Narsil\Localizations\Http\Controllers\LocaleController;
+use Narsil\Localization\Http\Controllers\LocaleController;
 
 #endregion
 

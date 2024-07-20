@@ -1,11 +1,11 @@
 <?php
 
-namespace Narsil\Localizations\Interfaces;
+namespace Narsil\Localization\Interfaces;
 
 #region USE
 
 use Illuminate\Database\Eloquent\Collection;
-use Narsil\Localizations\Models\Translation;
+use Narsil\Localization\Models\Translation;
 
 #endregion
 

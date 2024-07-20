@@ -1,11 +1,11 @@
 {
-	"name": "narsil/laravel-translations",
-	"description": "Laravel translations",
+	"name": "narsil/narsil-localization",
+	"description": "Narsil localization",
 	"license": "MIT",
 	"keywords": [
 		"narsil",
 		"laravel",
-		"translation",
+		"localization",
 		"translations"
 	],
 	"authors": [
@@ -24,18 +24,18 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
-			"Narsil\\Translations\\": "src/"
+			"Narsil\\Localization\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Narsil\\Translations\\Tests\\": "tests/"
+			"Narsil\\Localization\\Tests\\": "tests/"
 		}
 	},
 	"extra": {
 		"laravel": {
 			"providers": [
-				"Narsil\\Translations\\TranslationsServiceProvider"
+				"Narsil\\Localization\\NarsilLocalizationServiceProvider"
 			]
 		}
 	},
