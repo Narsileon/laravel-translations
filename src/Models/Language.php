@@ -7,6 +7,7 @@ namespace Narsil\Localization\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Narsil\Localization\Casts\TransAttribute;
 
 #endregion
 
@@ -28,7 +29,9 @@ class Language extends Model
     {
         $this->table = self::TABLE;
 
-        $this->casts = [];
+        $this->casts = [
+            self::LANGUAGE => TransAttribute::class,
+        ];
 
         $this->fillable = [
             self::ACTIVE,
