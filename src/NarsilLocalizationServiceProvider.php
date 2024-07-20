@@ -4,7 +4,9 @@ namespace Narsil\Localization;
 
 #region USE
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
+use Narsil\Localization\Blueprints\TransBlueprint;
 use Narsil\Localization\Commands\SyncTranslationsCommand;
 use Narsil\Localization\Interfaces\ITranslationRepository;
 use Narsil\Localization\Repositories\TranslationRepository;
@@ -41,6 +43,17 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
     #endregion
 
     #region PRIVATE METHODS
+
+    /**
+     * @return void
+     */
+    private function bootBlueprints(): void
+    {
+        Blueprint::macro('trans', function (string $column, bool $unique = false)
+        {
+            TransBlueprint::define($this, $column, $unique);
+        });
+    }
 
     /**
      * @return void
