@@ -54,13 +54,17 @@ return new class extends Migration
 
         Schema::create(Translation::TABLE, function (Blueprint $table)
         {
-            $table->resource();
+            $table->id();
 
+            $table->boolean(Translation::ACTIVE)
+                ->default(true);
             $table->string(Translation::KEY)
                 ->unique()
                 ->nullable();
             $table->text(Translation::DEFAULT_VALUE)
                 ->nullable();
+
+            $table->timestamps();
         });
     }
 
@@ -76,7 +80,7 @@ return new class extends Migration
 
         Schema::create(TranslationValue::TABLE, function (Blueprint $table)
         {
-            $table->resource();
+            $table->id();
 
             $table->foreignId(TranslationValue::KEY_ID)
                 ->constrained(Translation::TABLE, Translation::ID)
@@ -85,6 +89,8 @@ return new class extends Migration
                 ->constrained(Language::TABLE, Language::ID)
                 ->cascadeOnDelete();
             $table->text(TranslationValue::VALUE);
+
+            $table->timestamps();
         });
     }
 
@@ -100,11 +106,15 @@ return new class extends Migration
 
         Schema::create(Language::TABLE, function (Blueprint $table)
         {
-            $table->resource();
+            $table->id();
 
+            $table->boolean(Language::ACTIVE)
+                ->default(true);
             $table->trans(Language::LANGUAGE);
             $table->string(Language::LOCALE)
                 ->unique();
+
+            $table->timestamps();
         });
     }
 
