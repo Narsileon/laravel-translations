@@ -87,11 +87,7 @@ class Translation extends Model
      */
     final public function value(): HasOne
     {
-        return $this->hasOne(
-            TranslationValue::class,
-            TranslationValue::KEY_ID,
-            self::ID
-        )->whereHas(TranslationValue::RELATIONSHIP_LANGUAGE, function ($query)
+        return $this->{self::RELATIONSHIP_VALUES}->whereHas(TranslationValue::RELATIONSHIP_LANGUAGE, function ($query)
         {
             $query->where(Language::LOCALE, '=', App::getLocale());
         });

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Narsil\Localization\Enums\LocaleEnum;
-use Narsil\Localization\Interfaces\ITranslationRepository;
 use Narsil\Localization\Models\Language;
 
 #endregion
@@ -35,11 +34,6 @@ final class SessionLocale
         $locales = Config::get('narsil.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         $locale = Session::get(Language::LOCALE, $request->getPreferredLanguage($locales));
-
-        if ($locale !== App::getLocale())
-        {
-            app(ITranslationRepository::class)->flush();
-        }
 
         App::setLocale($locale);
 
