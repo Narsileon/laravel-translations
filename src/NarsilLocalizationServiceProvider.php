@@ -27,6 +27,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->bootBlueprints();
         $this->bootCommands();
         $this->bootMigrations();
         $this->bootRoutes();
