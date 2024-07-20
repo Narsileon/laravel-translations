@@ -67,9 +67,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
      */
     private function bootRoutes(): void
     {
-        $this->loadRoutesFrom([
-            __DIR__ . '/../routes/web.php'
-        ]);
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 
     #endregion
