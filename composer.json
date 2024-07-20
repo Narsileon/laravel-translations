@@ -1,6 +1,6 @@
 {
 	"name": "narsil/localization",
-	"description": "Narsil localization",
+	"description": "Narsil Localization",
 	"license": "MIT",
 	"keywords": [
 		"narsil",
@@ -28,11 +28,6 @@
 			"Narsil\\Localization\\": "src/"
 		}
 	},
-	"autoload-dev": {
-		"psr-4": {
-			"Narsil\\Localization\\Tests\\": "tests/"
-		}
-	},
 	"extra": {
 		"laravel": {
 			"providers": [
@@ -41,6 +36,8 @@
 		}
 	},
 	"config": {
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
 		"sort-packages": true
 	}
 }
