@@ -37,7 +37,7 @@ class Translation extends Model
         ];
 
         $this->with = [
-            self::RELATIONSHIP_VALUE,
+            self::RELATIONSHIP_VALUES,
         ];
 
         parent::__construct($attributes);

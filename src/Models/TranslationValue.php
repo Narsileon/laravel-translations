@@ -33,6 +33,10 @@ class TranslationValue extends Model
             self::VALUE,
         ];
 
+        $this->with = [
+            self::RELATIONSHIP_LANGUAGE,
+        ];
+
         parent::__construct($attributes);
     }
 
