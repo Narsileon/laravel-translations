@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
 use Narsil\Localization\Enums\LocaleEnum;
 use Narsil\Localization\Interfaces\ITranslationRepository;
@@ -86,56 +85,28 @@ final class LocalizationSeeder extends Seeder
     }
 
     /**
-     * @param array $translations
-     * @param array $formatedTranslations
+     * @param array<string,mixed> $translations
      * @param string $path
+     * @param array<string,string> $flattenedTranslations
      *
      * @return array
      */
-    private function formatTranslations(array $translations, array $formatedTranslations = [], string $path = null): array
+    private function flatTranslations(array $translations, string $path, array $flattenedTranslations = []): array
     {
         foreach ($translations as $key => $value)
         {
             if (is_array($value))
             {
-                $formatedTranslations = $this->formatTranslations($value, $formatedTranslations, $path == null ? $key : $path . '.' . $key);
+                $flattenedTranslations = $this->flatTranslations($value, $path . '.' . $key, $flattenedTranslations);
             }
 
             else
             {
-                $formatedTranslations[$path ? $path . '.' . $key : $key] = $value;
+                $flattenedTranslations[$path . '.' . $key] = $value;
             }
         }
 
-        return $formatedTranslations;
-    }
-
-    /**
-     * @param string $locale
-     * @param string $path
-     * @param string $namespace
-     *
-     * @return array
-     */
-    private function getFileTranslations(string $locale, string $path, string $namespace = '')
-    {
-        $translations = [];
-
-        if (file_exists($path))
-        {
-            $files = File::files($path);
-
-            foreach ($files as $file)
-            {
-                $fileName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-
-                $translations[$fileName] = Lang::get($namespace . $fileName, [], $locale);
-            }
-        }
-
-        $formatedTranslations = $this->formatTranslations($translations);
-
-        return $formatedTranslations;
+        return $flattenedTranslations;
     }
 
     /**
@@ -147,18 +118,20 @@ final class LocalizationSeeder extends Seeder
     {
         $jsonTranslations = Lang::get('*', [], $locale);
 
-        $narsilTranslations = $this->getFileTranslations(
-            locale: $locale,
-            path: base_path('/vendor/narsil/narsil-framework/lang/' . $locale),
-            namespace: 'narsil-framework::'
-        );
+        $keys = Config::get('narsil.lang', [
+            'narsil::locales',
+        ]);
 
-        $appTranslations = $this->getFileTranslations(
-            locale: $locale,
-            path: lang_path($locale),
-        );
+        $phpTranslations = [];
 
-        $translations = array_merge($narsilTranslations, $appTranslations, $jsonTranslations);
+        foreach ($keys as $key)
+        {
+            $path = array_pop(explode('::', $key));
+
+            $phpTranslations += $this->flatTranslations(Lang::get($key, [], $locale), $path);
+        }
+
+        $translations = array_merge($phpTranslations, $jsonTranslations);
 
         return $translations;
     }
