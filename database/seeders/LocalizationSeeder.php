@@ -44,7 +44,7 @@ final class LocalizationSeeder extends Seeder
             app(ITranslationRepository::class)->flush();
 
             $language->update([
-                Language::LANGUAGE => "locales.$locale"
+                Language::LANGUAGE => $locale
             ]);
         }
     }
