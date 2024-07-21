@@ -1,9 +1,0 @@
-{
-	"private": true,
-	"devDependencies": {
-		"lodash": "^4.17"
-	},
-	"dependencies": {
-		"zustand": "^4.5"
-	}
-}
