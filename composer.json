@@ -25,7 +25,6 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
-			"Database\\Seeders\\": "database/seeders/",
 			"Narsil\\Localization\\": "src/"
 		}
 	},
