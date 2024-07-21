@@ -31,7 +31,7 @@ final class SessionLocale
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        $locales = Config::get('narsil.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
+        $locales = Config::get('narsil-localization.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         $locale = Session::get(Language::LOCALE, $request->getPreferredLanguage($locales));
 

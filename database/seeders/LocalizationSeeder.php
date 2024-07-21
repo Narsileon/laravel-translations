@@ -31,7 +31,7 @@ final class LocalizationSeeder extends Seeder
     {
         app(ITranslationRepository::class)->flush();
 
-        $locales = Config::get('narsil.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
+        $locales = Config::get('narsil-localization.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         foreach ($locales as $locale)
         {
@@ -123,9 +123,7 @@ final class LocalizationSeeder extends Seeder
     {
         $jsonTranslations = Lang::get('*', [], $locale);
 
-        $keys = Config::get('narsil.lang', [
-            'narsil::locales',
-        ]);
+        $keys = Config::get('narsil-localization.translations', []);
 
         $phpTranslations = [];
 

@@ -30,6 +30,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
         $this->bootBlueprints();
         $this->bootCommands();
         $this->bootMigrations();
+        $this->bootPublishes();
         $this->bootRoutes();
         $this->bootTranslations();
     }
@@ -75,6 +76,16 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations',
         ]);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootPublishes(): void
+    {
+        $this->publishes([
+            __DIR__ . './Config' => config_path(),
+        ], 'config');
     }
 
     /**
