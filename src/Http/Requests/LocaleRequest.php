@@ -14,7 +14,7 @@ use Narsil\Localization\Models\Language;
  *
  * @author Jonathan Rigaux
  */
-class LocaleRequest extends FormRequest
+final class LocaleRequest extends FormRequest
 {
     #region PUBLIC METHODS
 
