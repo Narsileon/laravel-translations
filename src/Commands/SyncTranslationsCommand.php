@@ -5,6 +5,7 @@ namespace Narsil\Localization\Commands;
 #region USE
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
@@ -38,6 +39,23 @@ class SyncTranslationsCommand extends Command
 
     #endregion
 
+    #region PROPERTIES
+
+    /**
+     * @var Collection Collection of Language keyed by locale.
+     */
+    private Collection $languages;
+    /**
+     * @var Collection Collection of Translation keyed by key.
+     */
+    private Collection $translations;
+    /**
+     * @var Collection Collection of TranslationValue grouped by key_id.
+     */
+    private Collection $translationValues;
+
+    #endregion
+
     #region PUBLIC METHODS
 
     /**
@@ -45,15 +63,17 @@ class SyncTranslationsCommand extends Command
      */
     public function handle(): void
     {
+        $this->languages = Language::all()->keyBy(Language::LOCALE);
+        $this->translations = Translation::all()->keyBy(Translation::KEY);
+        $this->translationValues = Translation::all()->groupBy(TranslationValue::KEY_ID);
+
         app(ITranslationRepository::class)->flush();
 
         $locales = Config::get('narsil-localization.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         foreach ($locales as $locale)
         {
-            $language = Language::firstOrCreate([
-                Language::LOCALE => $locale,
-            ]);
+            $language = $this->getLanguage($locale);
 
             $this->createLanguageTranslations($language);
 
@@ -84,23 +104,8 @@ class SyncTranslationsCommand extends Command
 
         foreach ($translations as $key => $value)
         {
-            $entry = Translation::firstOrCreate([
-                Translation::KEY => $key
-            ]);
-
-            $localization = TranslationValue::firstOrCreate([
-                TranslationValue::KEY_ID => $entry->{Translation::ID},
-                TranslationValue::LANGUAGE_ID => $language->{Language::ID},
-            ], [
-                TranslationValue::VALUE => $value
-            ]);
-
-            if (!$localization->{TranslationValue::VALUE})
-            {
-                $localization->update([
-                    TranslationValue::VALUE => $value,
-                ]);
-            }
+            $translation = $this->getTranslation($key);
+            $translationValue = $this->getTranslationValue($language, $translation, $value);
         }
     }
 
@@ -137,15 +142,36 @@ class SyncTranslationsCommand extends Command
     /**
      * @param string $locale
      *
+     * @return Language
+     */
+    private function getLanguage(string $locale): Language
+    {
+        $language = $this->languages->get($locale);
+
+        if (!$language)
+        {
+            $language = Language::create([
+                Language::LOCALE => $locale,
+            ]);
+
+            $this->languages->put($locale, $language);
+        }
+
+        return $language;
+    }
+
+    /**
+     * @param string $locale
+     *
      * @return array
      */
     private function getLocaleTranslations(string $locale): array
     {
         $jsonTranslations = Lang::get('*', [], $locale);
 
-        $keys = Config::get('narsil-localization.translations', []);
-
         $phpTranslations = [];
+
+        $keys = Config::get('narsil-localization.translations', []);
 
         foreach ($keys as $key)
         {
@@ -158,6 +184,64 @@ class SyncTranslationsCommand extends Command
         $translations = array_merge($phpTranslations, $jsonTranslations);
 
         return $translations;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return Translation
+     */
+    private function getTranslation(string $key): Translation
+    {
+        $translation = $this->translations->get($key);
+
+        if (!$translation)
+        {
+            $translation = Translation::create([
+                Translation::KEY => $key
+            ]);
+
+            $this->translations->put($key, $translation);
+        }
+
+        return $translation;
+    }
+
+    /**
+     * @param Language $language
+     * @param Translation $translation
+     * @param string $value
+     *
+     * @return Translation
+     */
+    private function getTranslationValue(Language $language, Translation $translation, string $value): TranslationValue
+    {
+        $translationValues = $this->translationValues->get($translation->{Translation::ID});
+
+        $translationValue = $translationValues
+            ->where(TranslationValue::KEY_ID, $language->{Language::ID})
+            ->first();
+
+        if (!$translationValue)
+        {
+            $translationValue = TranslationValue::create([
+                TranslationValue::KEY_ID => $translation->{Translation::ID},
+                TranslationValue::LANGUAGE_ID => $language->{Language::ID},
+            ]);
+
+            $translationValues->push($translationValue);
+
+            $this->translationValues->put($translation->{Translation::ID}, $translationValues);
+        }
+
+        if (!$translationValue->{TranslationValue::VALUE} || !$translationValue->{TranslationValue::VALUE} !== $value)
+        {
+            $translationValue->update([
+                TranslationValue::VALUE => $value,
+            ]);
+        }
+
+        return $translationValue;
     }
 
     #endregion
