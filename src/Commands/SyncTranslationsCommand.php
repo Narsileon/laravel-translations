@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Narsil\Localization\Enums\LocaleEnum;
 use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\ConfigKeys;
 use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Models\TranslationValue;
@@ -69,7 +70,7 @@ class SyncTranslationsCommand extends Command
 
         app(ITranslationRepository::class)->flush();
 
-        $locales = Config::get('narsil-localization.locales', array_map(fn($case) => $case->value, LocaleEnum::cases()));
+        $locales = Config::get(ConfigKeys::LOCALES, array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         foreach ($locales as $locale)
         {
@@ -171,7 +172,7 @@ class SyncTranslationsCommand extends Command
 
         $phpTranslations = [];
 
-        $keys = Config::get('narsil-localization.translations', []);
+        $keys = Config::get(ConfigKeys::TRANSLATIONS, []);
 
         foreach ($keys as $key)
         {
