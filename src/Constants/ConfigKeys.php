@@ -1,6 +1,6 @@
 <?php
 
-namespace Narsil\Localization\Models;
+namespace Narsil\Localization\Constants;
 
 /**
  * @version 1.0.0

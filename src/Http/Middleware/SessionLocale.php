@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use Narsil\Localization\Constants\ConfigKeys;
 use Narsil\Localization\Enums\LocaleEnum;
-use Narsil\Localization\Models\ConfigKeys;
 use Narsil\Localization\Models\Language;
 
 #endregion
