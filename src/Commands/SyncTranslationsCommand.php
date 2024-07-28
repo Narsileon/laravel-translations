@@ -226,6 +226,7 @@ class SyncTranslationsCommand extends Command
             $translationValue = TranslationValue::create([
                 TranslationValue::KEY_ID => $translation->{Translation::ID},
                 TranslationValue::LANGUAGE_ID => $language->{Language::ID},
+                TranslationValue::VALUE => $value,
             ]);
 
             $translationValues->push($translationValue);
