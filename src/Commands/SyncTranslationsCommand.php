@@ -219,7 +219,7 @@ class SyncTranslationsCommand extends Command
     {
         $translationValues = $this->translationValues->get($translation->{Translation::ID}, collect([]));
 
-        $translationValue = $translationValues->where(TranslationValue::KEY_ID, $language->{Language::ID})
+        $translationValue = $translationValues->where(TranslationValue::LANGUAGE_ID, $language->{Language::ID})
             ->first();
 
         if (!$translationValue)
