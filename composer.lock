@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37da31a25957da50583d60fb9666b6fe",
+    "content-hash": "6e1c3e28a3cac448d70e0724ea82370e",
     "packages": [
         {
             "name": "brick/math",
@@ -1851,6 +1851,58 @@
                 }
             ],
             "time": "2024-06-28T09:40:51+00:00"
+        },
+        {
+            "name": "narsil/policies",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Narsileon/narsil-policies.git",
+                "reference": "fbea9311b2fc6a765de949254013b2a8ccf5a272"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Narsileon/narsil-policies/zipball/fbea9311b2fc6a765de949254013b2a8ccf5a272",
+                "reference": "fbea9311b2fc6a765de949254013b2a8ccf5a272",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.3",
+                "narsil/localization": "dev-main",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Narsil\\Policies\\NarsilPoliciesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Narsil\\Policies\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Rigaux"
+                }
+            ],
+            "description": "Narsil Policies",
+            "keywords": [
+                "laravel",
+                "narsil",
+                "policies"
+            ],
+            "time": "2024-08-10T08:38:07+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -7112,7 +7164,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "narsil/policies": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

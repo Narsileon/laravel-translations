@@ -5,10 +5,13 @@ namespace Narsil\Localization;
 #region USE
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Narsil\Localization\Blueprints\TransBlueprint;
 use Narsil\Localization\Commands\SyncTranslationsCommand;
 use Narsil\Localization\Interfaces\ITranslationRepository;
+use Narsil\Localization\Models\Language;
+use Narsil\Localization\Policies\LanguagePolicy;
 use Narsil\Localization\Repositories\TranslationRepository;
 
 #endregion
@@ -30,6 +33,7 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
         $this->bootBlueprints();
         $this->bootCommands();
         $this->bootMigrations();
+        $this->bootPolicies();
         $this->bootPublishes();
         $this->bootRoutes();
         $this->bootTranslations();
@@ -76,6 +80,14 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations',
         ]);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootPolicies(): void
+    {
+        Gate::policy(Language::class, LanguagePolicy::class);
     }
 
     /**
