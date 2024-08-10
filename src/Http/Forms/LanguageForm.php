@@ -1,0 +1,58 @@
+<?php
+
+namespace Narsil\Framework\Http\Forms;
+
+#region USE
+
+use Narsil\Forms\Builder\AbstractForm;
+use Narsil\Forms\Builder\AbstractFormNode;
+use Narsil\Forms\Builder\Elements\FormCard;
+use Narsil\Forms\Builder\Inputs\FormSelect;
+use Narsil\Forms\Builder\Inputs\FormString;
+use Narsil\Localization\Models\Language;
+
+#endregion
+
+/**
+ * @version 1.0.0
+ *
+ * @author Jonathan Rigaux
+ */
+class LanguageForm extends AbstractForm
+{
+    #region CONSTRUCTOR
+
+    /**
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct(
+            slug: "language",
+            title: "Language",
+        );
+    }
+
+    #endregion
+
+    #region PROTECTED METHODS
+
+    /**
+     * @return array<AbstractFormNode>
+     */
+    protected function getSchema(): array
+    {
+        return [
+            (new FormCard('default'))
+                ->children([
+                    (new FormString(Language::LOCALE))
+                        ->maxLength(2)
+                        ->required(),
+                    (new FormSelect(Language::LANGUAGE))
+                        ->required(),
+                ]),
+        ];
+    }
+
+    #endregion
+}

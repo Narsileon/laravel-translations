@@ -17,13 +17,24 @@
 	"repositories": [
 		{
 			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-forms.git",
+			"no-api": true
+		},
+		{
+			"type": "vcs",
 			"url": "git@github.com:Narsileon/narsil-policies.git",
+			"no-api": true
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-ui.git",
 			"no-api": true
 		}
 	],
 	"require": {
 		"php": "^8.2",
 		"laravel/framework": "^11.3",
+		"narsil/forms": "dev-main",
 		"narsil/policies": "dev-main"
 	},
 	"require-dev": {

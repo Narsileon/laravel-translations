@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e1c3e28a3cac448d70e0724ea82370e",
+    "content-hash": "dfe61c1564b9f48d1e8ae1c60c2b2938",
     "packages": [
         {
             "name": "brick/math",
@@ -1853,17 +1853,71 @@
             "time": "2024-06-28T09:40:51+00:00"
         },
         {
+            "name": "narsil/forms",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Narsileon/narsil-forms.git",
+                "reference": "f2469e507fb54128cbc57feaefd28c06d35c6aec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Narsileon/narsil-forms/zipball/f2469e507fb54128cbc57feaefd28c06d35c6aec",
+                "reference": "f2469e507fb54128cbc57feaefd28c06d35c6aec",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.3",
+                "narsil/localization": "dev-main",
+                "narsil/ui": "dev-main",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Narsil\\Forms\\NarsilFormsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Database\\Seeders\\": "database/seeders/",
+                    "Narsil\\Forms\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Rigaux"
+                }
+            ],
+            "description": "Narsil Forms",
+            "keywords": [
+                "forms",
+                "laravel",
+                "narsil"
+            ],
+            "time": "2024-08-10T14:55:17+00:00"
+        },
+        {
             "name": "narsil/policies",
             "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Narsileon/narsil-policies.git",
-                "reference": "fbea9311b2fc6a765de949254013b2a8ccf5a272"
+                "reference": "44091e91cafc231141ff8e6c812b0dce6f03337e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Narsileon/narsil-policies/zipball/fbea9311b2fc6a765de949254013b2a8ccf5a272",
-                "reference": "fbea9311b2fc6a765de949254013b2a8ccf5a272",
+                "url": "https://api.github.com/repos/Narsileon/narsil-policies/zipball/44091e91cafc231141ff8e6c812b0dce6f03337e",
+                "reference": "44091e91cafc231141ff8e6c812b0dce6f03337e",
                 "shasum": ""
             },
             "require": {
@@ -1902,7 +1956,60 @@
                 "narsil",
                 "policies"
             ],
-            "time": "2024-08-10T08:38:07+00:00"
+            "time": "2024-08-10T14:38:04+00:00"
+        },
+        {
+            "name": "narsil/ui",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Narsileon/narsil-ui.git",
+                "reference": "865d02ae54882565833941ed7234d69c9d1569f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Narsileon/narsil-ui/zipball/865d02ae54882565833941ed7234d69c9d1569f2",
+                "reference": "865d02ae54882565833941ed7234d69c9d1569f2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.3",
+                "narsil/localization": "dev-main",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Narsil\\UI\\NarsilUIServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Narsil\\UI\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Rigaux"
+                }
+            ],
+            "description": "Narsil UI",
+            "keywords": [
+                "laravel",
+                "narsil",
+                "react",
+                "ui"
+            ],
+            "time": "2024-08-07T09:08:37+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -7165,6 +7272,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "narsil/forms": 20,
         "narsil/policies": 20
     },
     "prefer-stable": true,
