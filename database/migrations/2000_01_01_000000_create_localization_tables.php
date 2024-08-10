@@ -55,8 +55,7 @@ return new class extends Migration
         Schema::create(Translation::TABLE, function (Blueprint $table)
         {
             $table
-                ->id();
-
+                ->id(Translation::ID);
             $table
                 ->boolean(Translation::ACTIVE)
                 ->default(true);
@@ -67,8 +66,8 @@ return new class extends Migration
             $table
                 ->text(Translation::DEFAULT_VALUE)
                 ->nullable();
-
-            $table->timestamps();
+            $table
+                ->timestamps();
         });
     }
 
@@ -85,7 +84,7 @@ return new class extends Migration
         Schema::create(TranslationValue::TABLE, function (Blueprint $table)
         {
             $table
-                ->id();
+                ->id(TranslationValue::ID);
             $table
                 ->foreignId(TranslationValue::KEY_ID)
                 ->constrained(Translation::TABLE, Translation::ID)
@@ -114,7 +113,7 @@ return new class extends Migration
         Schema::create(Language::TABLE, function (Blueprint $table)
         {
             $table
-                ->id();
+                ->id(Language::ID);
             $table
                 ->boolean(Language::ACTIVE)
                 ->default(true);
