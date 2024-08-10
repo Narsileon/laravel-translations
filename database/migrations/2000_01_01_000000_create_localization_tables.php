@@ -54,14 +54,18 @@ return new class extends Migration
 
         Schema::create(Translation::TABLE, function (Blueprint $table)
         {
-            $table->id();
+            $table
+                ->id();
 
-            $table->boolean(Translation::ACTIVE)
+            $table
+                ->boolean(Translation::ACTIVE)
                 ->default(true);
-            $table->string(Translation::KEY)
+            $table
+                ->string(Translation::KEY)
                 ->unique()
                 ->nullable();
-            $table->text(Translation::DEFAULT_VALUE)
+            $table
+                ->text(Translation::DEFAULT_VALUE)
                 ->nullable();
 
             $table->timestamps();
@@ -80,17 +84,20 @@ return new class extends Migration
 
         Schema::create(TranslationValue::TABLE, function (Blueprint $table)
         {
-            $table->id();
-
-            $table->foreignId(TranslationValue::KEY_ID)
+            $table
+                ->id();
+            $table
+                ->foreignId(TranslationValue::KEY_ID)
                 ->constrained(Translation::TABLE, Translation::ID)
                 ->cascadeOnDelete();
-            $table->foreignId(TranslationValue::LANGUAGE_ID)
+            $table
+                ->foreignId(TranslationValue::LANGUAGE_ID)
                 ->constrained(Language::TABLE, Language::ID)
                 ->cascadeOnDelete();
-            $table->text(TranslationValue::VALUE);
-
-            $table->timestamps();
+            $table
+                ->text(TranslationValue::VALUE);
+            $table
+                ->timestamps();
         });
     }
 
@@ -106,15 +113,18 @@ return new class extends Migration
 
         Schema::create(Language::TABLE, function (Blueprint $table)
         {
-            $table->id();
-
-            $table->boolean(Language::ACTIVE)
+            $table
+                ->id();
+            $table
+                ->boolean(Language::ACTIVE)
                 ->default(true);
-            $table->trans(Language::LANGUAGE);
-            $table->string(Language::LOCALE)
+            $table
+                ->trans(Language::LANGUAGE);
+            $table
+                ->string(Language::LOCALE)
                 ->unique();
-
-            $table->timestamps();
+            $table
+                ->timestamps();
         });
     }
 
