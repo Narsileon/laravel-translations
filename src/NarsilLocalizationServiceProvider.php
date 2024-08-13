@@ -15,6 +15,7 @@ use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Policies\LanguagePolicy;
 use Narsil\Localization\Policies\TranslationPolicy;
 use Narsil\Localization\Repositories\TranslationRepository;
+use Narsil\Localization\Services\LocalizationLoaderService;
 
 #endregion
 
@@ -47,6 +48,11 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(ITranslationRepository::class, TranslationRepository::class);
+
+        $this->app->singleton('translation.loader', function ($app)
+        {
+            return new LocalizationLoaderService($app['files'], $app['path.lang']);
+        });
     }
 
     #endregion
