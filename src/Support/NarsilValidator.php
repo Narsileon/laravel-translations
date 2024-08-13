@@ -86,7 +86,7 @@ class NarsilValidator extends BaseValidator
 
         foreach ($messages as $key => $value)
         {
-            Arr::set($result, $key, $value);
+            Arr::set($formattedMessages, $key, $value);
         }
 
         return $formattedMessages[self::VALIDATION] ?? [];
