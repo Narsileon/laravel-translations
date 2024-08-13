@@ -48,11 +48,6 @@ final class NarsilLocalizationServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(ITranslationRepository::class, TranslationRepository::class);
-
-        $this->app->singleton('translation.loader', function ($app)
-        {
-            return new LocalizationLoaderService($app['files'], $app['path.lang']);
-        });
     }
 
     #endregion
