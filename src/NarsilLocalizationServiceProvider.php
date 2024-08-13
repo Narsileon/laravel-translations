@@ -15,7 +15,6 @@ use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Policies\LanguagePolicy;
 use Narsil\Localization\Policies\TranslationPolicy;
 use Narsil\Localization\Repositories\TranslationRepository;
-use Narsil\Localization\Services\LocalizationLoaderService;
 
 #endregion
 

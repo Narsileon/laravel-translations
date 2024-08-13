@@ -4,8 +4,9 @@ namespace Narsil\Localization\Support;
 
 #reghion USE
 
-use Illuminate\Contracts\Validation\Validator as ValidatorContract;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator as BaseValidator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\App;
 use Narsil\Localization\Models\Language;
@@ -19,44 +20,27 @@ use Narsil\Localization\Models\TranslationValue;
  *
  * @author Jonathan Rigaux
  */
-class NarsilValidator
+class NarsilValidator extends BaseValidator
 {
-    #region CONSTRUCTOR
+    #region CONSTANTS
 
-    /**
-     * @param array $data
-     * @param array $rules
-     *
-     * @return void
-     */
-    public function __construct(array $data, array $rules)
-    {
-        $this->data = $data;
-        $this->rules = $rules;
-    }
-
-    #endregion
-
-    #region PROPERTIES
-
-    /**
-     * @var array
-     */
-    protected readonly array $data;
-    /**
-     * @var array
-     */
-    protected readonly array $rules;
+    private const VALIDATION = 'validation';
 
     #endregion
 
     #region PUBLIC METHODS
 
-    final public function validate(): ValidatorContract
+    /**
+     * @param array $data
+     * @param array $rules
+     *
+     * @return Validator
+     */
+    final public static function make(array $data, array $rules): Validator
     {
-        $messages = $this->getMessages();
+        $messages = static::getMessages();
 
-        return Validator::make($this->data, $this->rules, $messages);
+        return parent::make($data, $rules, $messages);
     }
 
     #endregion
@@ -66,22 +50,46 @@ class NarsilValidator
     /**
      * @return array
      */
-    protected function getMessages(): array
+    protected static function getMessages(): array
     {
         $locale = App::getLocale();
 
         return Cache::rememberForever("validation_messages_{$locale}", function () use ($locale)
         {
-            return TranslationValue::query()
+            $messages = TranslationValue::query()
                 ->with([
                     TranslationValue::RELATIONSHIP_KEY,
                     TranslationValue::RELATIONSHIP_LANGUAGE,
                 ])
                 ->whereRelation(TranslationValue::RELATIONSHIP_LANGUAGE, Language::LOCALE, '=', $locale)
-                ->whereRelation(TranslationValue::RELATIONSHIP_KEY, Translation::KEY, 'like', "validation.%")
+                ->whereRelation(TranslationValue::RELATIONSHIP_KEY, Translation::KEY, 'like', self::VALIDATION . ".%")
+                ->get()
                 ->pluck(TranslationValue::VALUE, TranslationValue::RELATIONSHIP_KEY . '.' .  Translation::KEY)
                 ->toArray();
+
+            return static::formatMessages($messages);
         });
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
+
+    /**
+     * @param array $messages
+     *
+     * @return array
+     */
+    private static function formatMessages(array $messages): array
+    {
+        $formattedMessages = [];
+
+        foreach ($messages as $key => $value)
+        {
+            Arr::set($result, $key, $value);
+        }
+
+        return $formattedMessages[self::VALIDATION] ?? [];
     }
 
     #endregion
