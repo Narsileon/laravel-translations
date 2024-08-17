@@ -30,6 +30,7 @@ class Language extends Model
         $this->table = self::TABLE;
 
         $this->casts = [
+            self::ACTIVE => 'boolean',
             self::LANGUAGE => TransAttribute::class,
         ];
 

@@ -28,8 +28,8 @@ class LanguageForm extends AbstractForm
     public function __construct()
     {
         parent::__construct(
-            slug: "language",
-            title: "Language",
+            slug: 'language',
+            title: 'Language',
         );
     }
 

@@ -28,6 +28,10 @@ class Translation extends Model
     {
         $this->table = self::TABLE;
 
+        $this->casts = [
+            self::ACTIVE => 'boolean',
+        ];
+
         $this->fillable = [
             self::ACTIVE,
             self::DEFAULT_VALUE,
