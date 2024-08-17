@@ -32,7 +32,7 @@ class SyncTranslationsCommand extends Command
      */
     public function __construct()
     {
-        $this->signature = 'narsil:sync-translations';
+        $this->signature = 'narsil:sync-translations {--fresh}';
         $this->description = 'Syncs the translation tables with the translation files';
 
         parent::__construct();
@@ -64,6 +64,11 @@ class SyncTranslationsCommand extends Command
      */
     public function handle(): void
     {
+        if ($this->option('fresh'))
+        {
+            Translation::query()->delete();
+        }
+
         $this->languages = Language::all()->keyBy(Language::LOCALE);
         $this->translations = Translation::all()->keyBy(Translation::KEY);
         $this->translationValues = Translation::all()->groupBy(TranslationValue::KEY_ID);
