@@ -28,11 +28,13 @@ class Menu extends AbstractMenu
             [
                 MenuNode::LABEL => 'Languages',
                 MenuNode::URL => '/backend/languages',
+                MenuNode::VISIBILITY => VisibilityEnum::AUTH->value,
                 MenuNode::RELATIONSHIP_ICON => 'lucide/languages',
             ],
             [
                 MenuNode::LABEL => 'Translations',
                 MenuNode::URL => '/backend/translations',
+                MenuNode::VISIBILITY => VisibilityEnum::AUTH->value,
                 MenuNode::RELATIONSHIP_ICON => 'lucide/book-a',
             ],
         ];
