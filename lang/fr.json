@@ -2,5 +2,8 @@
 	"de": "Allemand",
 	"en": "Anglais",
 	"fr": "Français",
-	"Language": "Langage"
+	"Language": "Langage",
+	"Languages": "Langages",
+	"Translation": "Traduction",
+	"Translations": "Traductions"
 }

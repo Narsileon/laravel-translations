@@ -6,6 +6,7 @@
 		"laravel",
 		"localization",
 		"narsil",
+		"php",
 		"react",
 		"translations"
 	],
@@ -17,24 +18,34 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-forms.git",
-			"no-api": true
+			"url": "git@github.com:Narsileon/narsil-forms.git"
 		},
 		{
 			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-policies.git",
-			"no-api": true
+			"url": "git@github.com:Narsileon/narsil-menus.git"
 		},
 		{
 			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-ui.git",
-			"no-api": true
+			"url": "git@github.com:Narsileon/narsil-policies.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-storage.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-tree.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-ui.git"
 		}
 	],
 	"require": {
 		"php": "^8.2",
 		"laravel/framework": "^11.3",
 		"narsil/forms": "dev-main",
+		"narsil/menus": "dev-main",
 		"narsil/policies": "dev-main"
 	},
 	"require-dev": {
