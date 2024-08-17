@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
-use Narsil\Localization\Constants\ConfigKeys;
+use Narsil\Localization\Constants\LocalizationConfig;
 use Narsil\Localization\Enums\LocaleEnum;
 use Narsil\Localization\Models\Language;
 
@@ -32,7 +32,7 @@ final class SessionLocale
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        $locales = Config::get(ConfigKeys::LOCALES, array_map(fn($case) => $case->value, LocaleEnum::cases()));
+        $locales = Config::get(LocalizationConfig::LOCALES, array_map(fn($case) => $case->value, LocaleEnum::cases()));
 
         $locale = Session::get(Language::LOCALE, $request->getPreferredLanguage($locales));
 

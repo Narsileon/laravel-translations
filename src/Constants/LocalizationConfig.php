@@ -7,7 +7,7 @@ namespace Narsil\Localization\Constants;
  *
  * @author Jonathan Rigaux
  */
-abstract class ConfigKeys
+abstract class LocalizationConfig
 {
     #region CONSTANTS
 
