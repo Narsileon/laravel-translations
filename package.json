@@ -1,0 +1,18 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.17",
+		"lodash": "^4.17",
+		"prettier": "^3.3.3",
+		"typescript": "^5.3"
+	},
+	"dependencies": {
+		"zod": "^3.23",
+		"zustand": "^4.5"
+	}
+}
