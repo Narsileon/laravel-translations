@@ -2,29 +2,29 @@ import { create } from "zustand";
 import { upperFirst } from "lodash";
 import { z, ZodErrorMap, ZodIssueCode } from "zod";
 
-type Translation = {
+export type Translation = {
 	id: number;
 	key: string | null;
 	value: string;
 };
 
-type TransOptions = {
+export type TransOptions = {
 	replacements?: Record<string, string | number>;
 	upperfirst?: boolean;
 };
 
-type TranslationStoreState = {
+export type TranslationStoreState = {
 	locale: string;
 	translations: { [key: string]: Translation };
 };
 
-type TranslationStoreAction = {
+export type TranslationStoreAction = {
 	trans: (key: string, options?: TransOptions) => string;
 	setLocale: (locale: string) => void;
 	setTranslations: (translations: { [key: string]: Translation }) => void;
 };
 
-type TranslationStoreType = TranslationStoreState & TranslationStoreAction;
+export type TranslationStoreType = TranslationStoreState & TranslationStoreAction;
 
 const initialState: TranslationStoreState = {
 	locale: "",
