@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { cn } from "@narsil-ui/Components";
 import { LanguageModel } from "@narsil-localization/Types";
 import { Link } from "@inertiajs/react";
@@ -11,11 +12,12 @@ import DropdownMenuTrigger from "@narsil-ui/Components/DropdownMenu/DropdownMenu
 import TooltipWrapper from "@narsil-ui/Components/Tooltip/TooltipWrapper";
 
 export interface AppLanguageProps extends ButtonProps {
+	chevron?: boolean;
 	format?: "long" | "short";
 	languages: LanguageModel[];
 }
 
-const AppLanguage = ({ languages, format = "short", ...props }: AppLanguageProps) => {
+const AppLanguage = ({ chevron = false, className, languages, format = "short", ...props }: AppLanguageProps) => {
 	const { locale, trans } = useTranslationsStore();
 
 	const label = (function () {
@@ -36,8 +38,19 @@ const AppLanguage = ({ languages, format = "short", ...props }: AppLanguageProps
 	return (
 		<DropdownMenu>
 			<TooltipWrapper tooltip={trans("language")}>
-				<DropdownMenuTrigger asChild={true}>
-					<Button {...props}>{label}</Button>
+				<DropdownMenuTrigger
+					className='group'
+					asChild={true}
+				>
+					<Button
+						className={cn("gap-x-1", className)}
+						{...props}
+					>
+						{label}
+						{chevron ? (
+							<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
+						) : null}
+					</Button>
 				</DropdownMenuTrigger>
 			</TooltipWrapper>
 
