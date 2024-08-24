@@ -1,4 +1,4 @@
-type LanguageModel = {
+export type LanguageModel = {
 	active: boolean;
 	created_at: string;
 	id: number;
@@ -7,7 +7,7 @@ type LanguageModel = {
 	updated_at: string;
 };
 
-type TranslationModel = {
+export type TranslationModel = {
 	active: boolean;
 	created_at: string;
 	default_value: string;
@@ -16,7 +16,7 @@ type TranslationModel = {
 	updated_at: string;
 };
 
-type TranslationValueModel = {
+export type TranslationValueModel = {
 	active: boolean;
 	created_at: string;
 	id: number;
