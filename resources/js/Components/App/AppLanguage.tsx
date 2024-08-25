@@ -66,7 +66,7 @@ const AppLanguage = ({
 				{languages.map((language, index) => {
 					return (
 						<DropdownMenuItem
-							className={cn({ "text-primary font-semibold": language.locale === locale })}
+							className={cn({ "text-primary-highlight font-semibold": language.locale === locale })}
 							asChild={true}
 							key={index}
 						>
