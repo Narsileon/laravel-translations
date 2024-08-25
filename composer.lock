@@ -2167,12 +2167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Narsileon/narsil-forms.git",
-                "reference": "4ff6275acbfb18630be6783c7094f6ed581b7e76"
+                "reference": "a1d4a70868893bbe89216c9f74c20bee7c36458f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Narsileon/narsil-forms/zipball/4ff6275acbfb18630be6783c7094f6ed581b7e76",
-                "reference": "4ff6275acbfb18630be6783c7094f6ed581b7e76",
+                "url": "https://api.github.com/repos/Narsileon/narsil-forms/zipball/a1d4a70868893bbe89216c9f74c20bee7c36458f",
+                "reference": "a1d4a70868893bbe89216c9f74c20bee7c36458f",
                 "shasum": ""
             },
             "require": {
@@ -2221,7 +2221,7 @@
                 "source": "https://github.com/Narsileon/narsil-forms/tree/main",
                 "issues": "https://github.com/Narsileon/narsil-forms/issues"
             },
-            "time": "2024-08-24T06:09:13+00:00"
+            "time": "2024-08-25T17:04:45+00:00"
         },
         {
             "name": "narsil/menus",
@@ -2535,12 +2535,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Narsileon/narsil-ui.git",
-                "reference": "67c2cb7265b412288de0407940bdb5ac22332b51"
+                "reference": "1ae9c336244edd727665caf36e5df33b25aacbd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Narsileon/narsil-ui/zipball/67c2cb7265b412288de0407940bdb5ac22332b51",
-                "reference": "67c2cb7265b412288de0407940bdb5ac22332b51",
+                "url": "https://api.github.com/repos/Narsileon/narsil-ui/zipball/1ae9c336244edd727665caf36e5df33b25aacbd1",
+                "reference": "1ae9c336244edd727665caf36e5df33b25aacbd1",
                 "shasum": ""
             },
             "require": {
@@ -2588,7 +2588,7 @@
                 "source": "https://github.com/Narsileon/narsil-ui/tree/main",
                 "issues": "https://github.com/Narsileon/narsil-ui/issues"
             },
-            "time": "2024-08-24T05:35:17+00:00"
+            "time": "2024-08-25T17:19:07+00:00"
         },
         {
             "name": "nesbot/carbon",
