@@ -17,7 +17,14 @@ export interface AppLanguageProps extends ButtonProps {
 	languages: LanguageModel[];
 }
 
-const AppLanguage = ({ chevron = false, className, languages, format = "short", ...props }: AppLanguageProps) => {
+const AppLanguage = ({
+	chevron = false,
+	children,
+	className,
+	languages,
+	format = "short",
+	...props
+}: AppLanguageProps) => {
 	const { locale, trans } = useTranslationsStore();
 
 	const label = (function () {
@@ -46,6 +53,7 @@ const AppLanguage = ({ chevron = false, className, languages, format = "short", 
 						className={cn("gap-x-1", className)}
 						{...props}
 					>
+						{children}
 						{label}
 						{chevron ? (
 							<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
