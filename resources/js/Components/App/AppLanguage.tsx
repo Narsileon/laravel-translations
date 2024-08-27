@@ -70,7 +70,8 @@ const AppLanguage = ({
 							asChild={true}
 							key={index}
 						>
-							<Link
+                            <Link
+                                as='button'
 								href={route("locale")}
 								method='patch'
 								data={{
