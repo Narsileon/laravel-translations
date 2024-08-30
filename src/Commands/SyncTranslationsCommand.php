@@ -64,14 +64,9 @@ class SyncTranslationsCommand extends Command
      */
     public function handle(): void
     {
-        if ($this->option('fresh'))
-        {
-            Translation::query()->delete();
-        }
-
         $this->languages = Language::all()->keyBy(Language::LOCALE);
         $this->translations = Translation::all()->keyBy(Translation::KEY);
-        $this->translationValues = Translation::all()->groupBy(TranslationValue::KEY_ID);
+        $this->translationValues = TranslationValue::all()->groupBy(TranslationValue::KEY_ID);
 
         app(ITranslationRepository::class)->flush();
 
@@ -239,8 +234,7 @@ class SyncTranslationsCommand extends Command
 
             $this->translationValues->put($translation->{Translation::ID}, $translationValues);
         }
-
-        if (!$translationValue->{TranslationValue::VALUE} || !$translationValue->{TranslationValue::VALUE} !== $value)
+        else if ($this->option('fresh') && $translationValue->{TranslationValue::VALUE} !== $value)
         {
             $translationValue->update([
                 TranslationValue::VALUE => $value,
