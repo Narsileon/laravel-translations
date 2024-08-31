@@ -12,11 +12,11 @@ abstract class LocalizationConfig
     #region CONSTANTS
 
     /**
-     * @var string
+     * @var string List of available locales.
      */
     final public const LOCALES = 'narsil-localization.locales';
     /**
-     * @var string
+     * @var string List of translation namespaces.
      */
     final public const TRANSLATIONS = 'narsil-localization.translations';
 
