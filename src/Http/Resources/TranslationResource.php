@@ -30,7 +30,7 @@ class TranslationResource extends JsonResource
             Translation::DEFAULT_VALUE => $this->{Translation::DEFAULT_VALUE},
             Translation::ID => $this->{Translation::ID},
 
-            Translation::RELATIONSHIP_VALUES => $this->{Translation::RELATIONSHIP_VALUES}
+            Translation::RELATIONSHIP_VALUES => TranslationResource::collection($this->{Translation::RELATIONSHIP_VALUES}),
         ];
     }
 
