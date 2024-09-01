@@ -12,7 +12,9 @@ Route::middleware([
     'web'
 ])->group(function ()
 {
-    Route::patch('locale', LocaleController::class)->name('locale');
+    Route::patch('locale', LocaleController::class)
+        ->name('locale');
 
-    Route::get('translations/fetch', TranslationFetchController::class)->name('translations.fetch');
+    Route::get('translations/fetch', TranslationFetchController::class)
+        ->name('translations.fetch');
 });

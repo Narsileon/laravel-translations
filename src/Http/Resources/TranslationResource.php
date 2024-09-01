@@ -6,7 +6,9 @@ namespace Narsil\Localization\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
+use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 
@@ -30,8 +32,27 @@ class TranslationResource extends JsonResource
             Translation::DEFAULT_VALUE => $this->{Translation::DEFAULT_VALUE},
             Translation::ID => $this->{Translation::ID},
 
-            Translation::RELATIONSHIP_VALUES => TranslationValueResource::collection($this->{Translation::RELATIONSHIP_VALUES}),
+            Translation::RELATIONSHIP_VALUES => $this->getValues(),
         ];
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
+
+    /**
+     * @return array
+     */
+    private function getValues(): array
+    {
+        $values = [];
+
+        foreach ($this->values as $value)
+        {
+            $values[$value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE}] = $value->{TranslationValue::VALUE};
+        }
+
+        return $values;
     }
 
     #endregion
