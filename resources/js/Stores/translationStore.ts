@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { LanguageModel } from "@narsil-localization/Types";
 import { upperFirst } from "lodash";
 import { z, ZodErrorMap, ZodIssueCode } from "zod";
 
@@ -14,19 +15,22 @@ export type TransOptions = {
 };
 
 export type TranslationStoreState = {
+	languages: LanguageModel[];
 	locale: string;
 	translations: { [key: string]: Translation };
 };
 
 export type TranslationStoreAction = {
 	trans: (key: string, options?: TransOptions) => string;
+	setLanguages: (languages: LanguageModel[]) => void;
 	setLocale: (locale: string) => void;
-	setTranslations: (translations: { [key: string]: Translation }) => void;
+	setTranslations: (translations: TranslationStoreState["translations"]) => void;
 };
 
 export type TranslationStoreType = TranslationStoreState & TranslationStoreAction;
 
 const initialState: TranslationStoreState = {
+	languages: [],
 	locale: "",
 	translations: {},
 };
@@ -178,11 +182,14 @@ export const useTranslationsStore = create<TranslationStoreType>((set, get) => (
 
 		return options?.upperfirst === false ? text : upperFirst(text);
 	},
+	setLanguages: (languages) =>
+		set({
+			languages: languages,
+		}),
 	setLocale: (locale) =>
-		set((state) => ({
-			...state,
+		set({
 			locale: locale,
-		})),
+		}),
 	setTranslations: (translations) =>
 		set((state) => {
 			const newState = {
