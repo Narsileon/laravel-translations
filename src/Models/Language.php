@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Narsil\Localization\Casts\TransAttribute;
+use Narsil\Localization\Interfaces\IHasTranslations;
+use Narsil\Localization\Traits\HasTranslations;
 
 #endregion
 
@@ -16,8 +18,10 @@ use Narsil\Localization\Casts\TransAttribute;
  *
  * @author Jonathan Rigaux
  */
-class Language extends Model
+class Language extends Model implements IHasTranslations
 {
+    use HasTranslations;
+
     #region CONSTRUCTOR
 
     /**
