@@ -28,9 +28,7 @@ class TranslationValueResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            TranslationValue::VALUE => $this->{TranslationValue::VALUE},
-
-            Language::LOCALE => $this->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE},
+            $this->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE} => $this->{TranslationValue::VALUE}
         ];
     }
 
