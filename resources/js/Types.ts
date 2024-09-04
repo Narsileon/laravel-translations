@@ -1,5 +1,3 @@
-import { AnyZodObject } from "zod";
-
 export type LanguageModel = {
 	active: boolean;
 	created_at: string;
