@@ -1,3 +1,5 @@
+import { AnyZodObject } from "zod";
+
 export type LanguageModel = {
 	active: boolean;
 	created_at: string;
@@ -13,6 +15,7 @@ export type TranslationModel = {
 	default_value: string;
 	id: number;
 	key: string;
+	values: any;
 	updated_at: string;
 };
 
