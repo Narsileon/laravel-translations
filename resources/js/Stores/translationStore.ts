@@ -30,7 +30,7 @@ export type TranslationStoreAction = {
 
 export type TranslationStoreType = TranslationStoreState & TranslationStoreAction;
 
-const initialState: TranslationStoreState = {
+const defaultState: TranslationStoreState = {
 	languages: [],
 	locale: "",
 	translations: {},
@@ -166,44 +166,46 @@ const errorMap = (trans: TranslationStoreAction["trans"]): ZodErrorMap => {
 	};
 };
 
-export const useTranslationsStore = create<TranslationStoreType>((set, get) => ({
-	...initialState,
+export const useTranslationsStore = (initialState: TranslationStoreType) =>
+	create<TranslationStoreType>((set, get) => ({
+		...defaultState,
+		...initialState,
 
-	getLanguage: () => {
-		return get().languages.find((x) => x.locale === get().locale) as LanguageModel;
-	},
-	setLanguages: (languages) =>
-		set({
-			languages: languages,
-		}),
-	setLocale: (locale) =>
-		set({
-			locale: locale,
-		}),
-	setTranslations: (translations) =>
-		set((state) => {
-			const newState = {
-				...state,
-				translations: translations,
-			};
+		getLanguage: () => {
+			return get().languages.find((x) => x.locale === get().locale) as LanguageModel;
+		},
+		setLanguages: (languages) =>
+			set({
+				languages: languages,
+			}),
+		setLocale: (locale) =>
+			set({
+				locale: locale,
+			}),
+		setTranslations: (translations) =>
+			set((state) => {
+				const newState = {
+					...state,
+					translations: translations,
+				};
 
-			z.setErrorMap(errorMap(newState.trans));
+				z.setErrorMap(errorMap(newState.trans));
 
-			return newState;
-		}),
-	trans: (key, options) => {
-		let text = get().translations[key]?.value ?? key.split(".").pop();
+				return newState;
+			}),
+		trans: (key, options) => {
+			let text = get().translations[key]?.value ?? key.split(".").pop();
 
-		if (options?.replacements) {
-			Object.entries(options?.replacements).map(([replacementKey, replacementValue]) => {
-				if (text.includes(replacementKey)) {
-					text = text.replace(`:${replacementKey}`, `${replacementValue}`);
-				} else if (text.includes(upperFirst(replacementKey))) {
-					text = text.replace(`:${upperFirst(replacementKey)}`, upperFirst(`${replacementValue}`));
-				}
-			});
-		}
+			if (options?.replacements) {
+				Object.entries(options?.replacements).map(([replacementKey, replacementValue]) => {
+					if (text.includes(replacementKey)) {
+						text = text.replace(`:${replacementKey}`, `${replacementValue}`);
+					} else if (text.includes(upperFirst(replacementKey))) {
+						text = text.replace(`:${upperFirst(replacementKey)}`, upperFirst(`${replacementValue}`));
+					}
+				});
+			}
 
-		return options?.upperfirst === false ? text : upperFirst(text);
-	},
-}));
+			return options?.upperfirst === false ? text : upperFirst(text);
+		},
+	}));
