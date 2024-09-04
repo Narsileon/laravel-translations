@@ -21,10 +21,11 @@ export type TranslationStoreState = {
 };
 
 export type TranslationStoreAction = {
-	trans: (key: string, options?: TransOptions) => string;
+	getLanguage: () => LanguageModel;
 	setLanguages: (languages: LanguageModel[]) => void;
 	setLocale: (locale: string) => void;
 	setTranslations: (translations: TranslationStoreState["translations"]) => void;
+	trans: (key: string, options?: TransOptions) => string;
 };
 
 export type TranslationStoreType = TranslationStoreState & TranslationStoreAction;
@@ -167,20 +168,9 @@ const errorMap = (trans: TranslationStoreAction["trans"]): ZodErrorMap => {
 
 export const useTranslationsStore = create<TranslationStoreType>((set, get) => ({
 	...initialState,
-	trans: (key, options) => {
-		let text = get().translations[key]?.value ?? key.split(".").pop();
 
-		if (options?.replacements) {
-			Object.entries(options?.replacements).map(([replacementKey, replacementValue]) => {
-				if (text.includes(replacementKey)) {
-					text = text.replace(`:${replacementKey}`, `${replacementValue}`);
-				} else if (text.includes(upperFirst(replacementKey))) {
-					text = text.replace(`:${upperFirst(replacementKey)}`, upperFirst(`${replacementValue}`));
-				}
-			});
-		}
-
-		return options?.upperfirst === false ? text : upperFirst(text);
+	getLanguage: () => {
+		return get().languages.find((x) => x.locale === get().locale) as LanguageModel;
 	},
 	setLanguages: (languages) =>
 		set({
@@ -201,4 +191,19 @@ export const useTranslationsStore = create<TranslationStoreType>((set, get) => (
 
 			return newState;
 		}),
+	trans: (key, options) => {
+		let text = get().translations[key]?.value ?? key.split(".").pop();
+
+		if (options?.replacements) {
+			Object.entries(options?.replacements).map(([replacementKey, replacementValue]) => {
+				if (text.includes(replacementKey)) {
+					text = text.replace(`:${replacementKey}`, `${replacementValue}`);
+				} else if (text.includes(upperFirst(replacementKey))) {
+					text = text.replace(`:${upperFirst(replacementKey)}`, upperFirst(`${replacementValue}`));
+				}
+			});
+		}
+
+		return options?.upperfirst === false ? text : upperFirst(text);
+	},
 }));
