@@ -1,12 +1,11 @@
 import * as React from "react";
-import type { LanguageModel } from "@narsil-localization/Types";
 
 type LanguageProviderState = {
-	contextLanguage: LanguageModel | undefined;
+	contextLocale: string;
 };
 
 type LanguageProviderAction = {
-	setContextLanguage: (language: LanguageModel) => void;
+	setContextLocale: (locale: string) => void;
 };
 
 type LanguageProviderType = LanguageProviderState & LanguageProviderAction;
@@ -15,15 +14,15 @@ const LanguageProviderContext = React.createContext<LanguageProviderType>({} as 
 
 export interface LanguageProviderProps {
 	children: React.ReactNode;
-	defaultLanguage: LanguageModel;
+	initialLocale: string;
 }
 
-const LanguageProvider = ({ children, defaultLanguage }: LanguageProviderProps) => {
-	const [contextLanguage, setContextLanguage] = React.useState<LanguageModel>(defaultLanguage);
+const LanguageProvider = ({ children, initialLocale }: LanguageProviderProps) => {
+	const [contextLocale, setContextLocale] = React.useState<string>(initialLocale);
 
 	const value = {
-		contextLanguage: contextLanguage,
-		setContextLanguage: setContextLanguage,
+		contextLocale: contextLocale,
+		setContextLocale: setContextLocale,
 	};
 
 	return <LanguageProviderContext.Provider value={value}>{children}</LanguageProviderContext.Provider>;

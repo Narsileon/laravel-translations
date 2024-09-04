@@ -13,11 +13,12 @@ import TooltipWrapper from "@narsil-ui/Components/Tooltip/TooltipWrapper";
 
 export interface AppLanguageProps extends ButtonProps {
 	chevron?: boolean;
+	languages: LanguageModel[];
 	short?: boolean;
 }
 
-const AppLanguage = ({ chevron = false, children, className, short = true, ...props }: AppLanguageProps) => {
-	const { languages, locale, trans } = useTranslationsStore();
+const AppLanguage = ({ chevron = false, children, className, languages, short = true, ...props }: AppLanguageProps) => {
+	const { locale, trans } = useTranslationsStore();
 
 	return (
 		<DropdownMenu>

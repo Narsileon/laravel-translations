@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { cn } from "@narsil-ui/Components";
+import { LanguageModel } from "@narsil-localization/Types";
 import { useLanguageContext } from "./LanguageProvider";
 import { useTranslationsStore } from "@narsil-localization/Stores/translationStore";
 import Button, { ButtonProps } from "@narsil-ui/Components/Button/Button";
@@ -8,12 +9,14 @@ import DropdownMenuContent from "@narsil-ui/Components/DropdownMenu/DropdownMenu
 import DropdownMenuItem from "@narsil-ui/Components/DropdownMenu/DropdownMenuItem";
 import DropdownMenuTrigger from "@narsil-ui/Components/DropdownMenu/DropdownMenuTrigger";
 
-export interface LanguageDropdownProps extends ButtonProps {}
+export interface LanguageDropdownProps extends ButtonProps {
+	languages: LanguageModel[];
+}
 
-const LanguageDropdown = ({ children, className, ...props }: LanguageDropdownProps) => {
-	const { languages } = useTranslationsStore();
+const LanguageDropdown = ({ children, className, languages, ...props }: LanguageDropdownProps) => {
+	const { trans } = useTranslationsStore();
 
-	const { contextLanguage, setContextLanguage } = useLanguageContext();
+	const { contextLocale, setContextLocale } = useLanguageContext();
 
 	return (
 		<DropdownMenu>
@@ -25,7 +28,7 @@ const LanguageDropdown = ({ children, className, ...props }: LanguageDropdownPro
 					className={cn("gap-x-1", className)}
 					{...props}
 				>
-					{contextLanguage?.language}
+					{trans(contextLocale)}
 					<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 				</Button>
 			</DropdownMenuTrigger>
@@ -33,8 +36,8 @@ const LanguageDropdown = ({ children, className, ...props }: LanguageDropdownPro
 				{languages.map((language) => {
 					return (
 						<DropdownMenuItem
-							active={language.locale === contextLanguage?.locale}
-							onClick={() => setContextLanguage(language)}
+							active={language.locale === contextLocale}
+							onClick={() => setContextLocale(language.locale)}
 							key={language.locale}
 						>
 							{language.language}
