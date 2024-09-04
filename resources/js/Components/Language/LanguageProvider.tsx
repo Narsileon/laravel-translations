@@ -21,9 +21,13 @@ const LanguageProvider = ({ children, initialLocale }: LanguageProviderProps) =>
 	const [contextLocale, setContextLocale] = React.useState<string>(initialLocale);
 
 	const value = {
-		contextLocale: contextLocale ? contextLocale : "en",
+		contextLocale: contextLocale,
 		setContextLocale: setContextLocale,
 	};
+
+	React.useEffect(() => {
+		setContextLocale(initialLocale);
+	}, [initialLocale]);
 
 	return <LanguageProviderContext.Provider value={value}>{children}</LanguageProviderContext.Provider>;
 };
