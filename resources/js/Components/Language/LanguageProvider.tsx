@@ -2,7 +2,7 @@ import * as React from "react";
 import type { LanguageModel } from "@narsil-localization/Types";
 
 type LanguageProviderState = {
-	contextLanguage: LanguageModel;
+	contextLanguage: LanguageModel | undefined;
 };
 
 type LanguageProviderAction = {

@@ -25,7 +25,7 @@ const LanguageDropdown = ({ children, className, ...props }: LanguageDropdownPro
 					className={cn("gap-x-1", className)}
 					{...props}
 				>
-					{contextLanguage.language}
+					{contextLanguage?.language}
 					<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 				</Button>
 			</DropdownMenuTrigger>
@@ -33,7 +33,7 @@ const LanguageDropdown = ({ children, className, ...props }: LanguageDropdownPro
 				{languages.map((language) => {
 					return (
 						<DropdownMenuItem
-							active={language.locale === contextLanguage.locale}
+							active={language.locale === contextLanguage?.locale}
 							onClick={() => setContextLanguage(language)}
 							key={language.locale}
 						>
