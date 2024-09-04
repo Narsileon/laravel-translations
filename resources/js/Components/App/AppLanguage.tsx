@@ -13,34 +13,11 @@ import TooltipWrapper from "@narsil-ui/Components/Tooltip/TooltipWrapper";
 
 export interface AppLanguageProps extends ButtonProps {
 	chevron?: boolean;
-	format?: "long" | "short";
-	languages: LanguageModel[];
+	short?: boolean;
 }
 
-const AppLanguage = ({
-	chevron = false,
-	children,
-	className,
-	languages,
-	format = "short",
-	...props
-}: AppLanguageProps) => {
-	const { locale, trans } = useTranslationsStore();
-
-	const label = (function () {
-		let value;
-
-		switch (format) {
-			case "long":
-				value = trans(locale);
-				break;
-			default:
-				value = upperCase(locale);
-				break;
-		}
-
-		return value;
-	})();
+const AppLanguage = ({ chevron = false, children, className, short = true, ...props }: AppLanguageProps) => {
+	const { languages, locale, trans } = useTranslationsStore();
 
 	return (
 		<DropdownMenu>
@@ -54,7 +31,7 @@ const AppLanguage = ({
 						{...props}
 					>
 						{children}
-						{label}
+						{short ? upperCase(locale) : trans(locale)}
 						{chevron ? (
 							<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 						) : null}
@@ -70,8 +47,8 @@ const AppLanguage = ({
 							asChild={true}
 							key={index}
 						>
-                            <Link
-                                as='button'
+							<Link
+								as='button'
 								href={route("locale")}
 								method='patch'
 								data={{
