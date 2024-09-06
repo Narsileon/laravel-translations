@@ -48,7 +48,7 @@ class LanguageForm extends AbstractForm
                     (new FormString(Language::LOCALE))
                         ->maxLength(2)
                         ->required(),
-                    (new FormSelect(Language::LANGUAGE))
+                    (new FormSelect(Language::LABEL))
                         ->required(),
                 ]),
         ];

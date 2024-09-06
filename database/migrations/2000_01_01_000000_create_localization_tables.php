@@ -118,10 +118,10 @@ return new class extends Migration
                 ->boolean(Language::ACTIVE)
                 ->default(true);
             $table
-                ->trans(Language::LANGUAGE);
-            $table
                 ->string(Language::LOCALE)
                 ->unique();
+            $table
+                ->trans(Language::LABEL);
             $table
                 ->timestamps();
         });

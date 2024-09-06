@@ -56,7 +56,7 @@ const AppLanguage = ({ chevron = false, children, className, languages, short = 
 									locale: language.locale,
 								}}
 							>
-								{language.language}
+								{language.label}
 							</Link>
 						</DropdownMenuItem>
 					);

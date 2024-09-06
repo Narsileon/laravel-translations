@@ -2,7 +2,7 @@ export type LanguageModel = {
 	active: boolean;
 	created_at: string;
 	id: number;
-	language: string;
+	label: string;
 	locale: string;
 	updated_at: string;
 };

@@ -35,12 +35,12 @@ class Language extends Model implements IHasTranslations
 
         $this->casts = [
             self::ACTIVE => 'boolean',
-            self::LANGUAGE => TransAttribute::class,
+            self::LABEL => TransAttribute::class,
         ];
 
         $this->fillable = [
             self::ACTIVE,
-            self::LANGUAGE,
+            self::LABEL,
             self::LOCALE,
         ];
 
@@ -62,7 +62,7 @@ class Language extends Model implements IHasTranslations
     /**
      * @var string
      */
-    final public const LANGUAGE = 'language';
+    final public const LABEL = 'label';
     /**
      * @var string
      */
@@ -87,7 +87,7 @@ class Language extends Model implements IHasTranslations
         $query
             ->select([
                 self::ID,
-                self::LANGUAGE,
+                self::LABEL,
                 self::LOCALE,
             ])
             ->where(self::ACTIVE, true);

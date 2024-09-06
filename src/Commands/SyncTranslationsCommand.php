@@ -81,7 +81,7 @@ class SyncTranslationsCommand extends Command
             app(ITranslationRepository::class)->flush();
 
             $language->update([
-                Language::LANGUAGE => $locale
+                Language::LABEL => $locale
             ]);
         }
 
