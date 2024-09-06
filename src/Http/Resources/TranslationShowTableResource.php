@@ -36,9 +36,11 @@ class TranslationShowTableResource extends ShowTableResource
 
         $attributes = $this->resource->toArray();
 
-        $attributes[TranslationValue::VALUE] = $this->resource->{Translation::RELATIONSHIP_VALUES}
+        $translationValue = $this->resource->{Translation::RELATIONSHIP_VALUES}
             ->where(TranslationValue::LANGUAGE_ID, $language->{Language::ID})
             ->first();
+
+        $attributes[TranslationValue::VALUE] = $translationValue?->{TranslationValue::VALUE};
 
         $attributes[Translation::RELATIONSHIP_VALUES] = null;
 

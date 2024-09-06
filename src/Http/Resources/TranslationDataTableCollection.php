@@ -39,9 +39,11 @@ class TranslationDataTableCollection extends DataTableCollection
         {
             $attributes = $item->toArray();
 
-            $attributes[TranslationValue::VALUE] = $this->resource->{Translation::RELATIONSHIP_VALUES}
+            $translationValue = $item->{Translation::RELATIONSHIP_VALUES}
                 ->where(TranslationValue::LANGUAGE_ID, $language->{Language::ID})
                 ->first();
+
+            $attributes[TranslationValue::VALUE] = $translationValue?->{TranslationValue::VALUE};
 
             $attributes[Translation::RELATIONSHIP_VALUES] = null;
 
