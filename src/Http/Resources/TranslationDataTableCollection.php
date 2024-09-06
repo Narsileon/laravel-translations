@@ -47,7 +47,7 @@ class TranslationDataTableCollection extends DataTableCollection
 
             $attributes[Translation::RELATIONSHIP_VALUES] = null;
 
-            return array_filter($attributes);
+            return $attributes;
         });
     }
 
