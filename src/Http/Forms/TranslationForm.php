@@ -8,7 +8,8 @@ use Narsil\Forms\Builder\AbstractForm;
 use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
-use Narsil\Localization\Models\Language;
+use Narsil\Localization\Models\Translation;
+use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 
@@ -17,7 +18,7 @@ use Narsil\Localization\Models\Language;
  *
  * @author Jonathan Rigaux
  */
-class LanguageForm extends AbstractForm
+class TranslationForm extends AbstractForm
 {
     #region CONSTRUCTOR
 
@@ -28,7 +29,7 @@ class LanguageForm extends AbstractForm
      */
     public function __construct(mixed $resource)
     {
-        parent::__construct($resource, 'Language', 'language');
+        parent::__construct($resource, 'Translation', 'translation');
     }
 
     #endregion
@@ -43,10 +44,11 @@ class LanguageForm extends AbstractForm
         return [
             (new FormCard('default'))
                 ->children([
-                    (new FormString(Language::LOCALE))
-                        ->maxLength(2)
+                    (new FormString(Translation::KEY))
                         ->required(),
-                    (new FormString(Language::LABEL))
+                    (new FormString(Translation::DEFAULT_VALUE))
+                        ->required(),
+                    (new FormString(TranslationValue::VALUE))
                         ->required(),
                 ]),
         ];
