@@ -58,16 +58,17 @@ class TranslationShowTableResource extends ShowTableResource
     {
         $columns = parent::getColumns();
 
-        $columns->put(
-            TranslationValue::VALUE,
-            (new ModelColumn())
+        $offset = $columns->keys()->search('created_at');
+
+        $columns->splice($offset, 0, [
+            TranslationValue::VALUE => (new ModelColumn())
                 ->setAccessorKey(TranslationValue::VALUE)
                 ->setForeignTable(TranslationValue::TABLE)
                 ->setHeader(LocalizationService::trans("validation.attributes.value"))
                 ->setId(TranslationValue::VALUE)
                 ->setRelation(Translation::RELATIONSHIP_VALUES)
                 ->setType(Types::STRING)
-        );
+        ]);
 
         return $columns;
     }
