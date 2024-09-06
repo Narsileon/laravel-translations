@@ -64,9 +64,14 @@ class SyncTranslationsCommand extends Command
      */
     public function handle(): void
     {
-        $this->languages = Language::all()->keyBy(Language::LOCALE);
-        $this->translations = Translation::all()->keyBy(Translation::KEY);
-        $this->translationValues = TranslationValue::all()->groupBy(TranslationValue::KEY_ID);
+        $this->languages = Language::all()
+            ->keyBy(Language::LOCALE);
+
+        $this->translations = Translation::all()
+            ->keyBy(Translation::KEY);
+
+        $this->translationValues = TranslationValue::all()
+            ->groupBy(TranslationValue::KEY_ID);
 
         app(ITranslationRepository::class)->flush();
 
@@ -76,7 +81,7 @@ class SyncTranslationsCommand extends Command
         {
             $language = $this->getLanguage($locale);
 
-            $this->createLanguageTranslations($language);
+            $this->createLanguageTranslations($language, $locale === 'en');
 
             app(ITranslationRepository::class)->flush();
 
@@ -96,16 +101,17 @@ class SyncTranslationsCommand extends Command
 
     /**
      * @param Language $language
+     * @param boolean $default
      *
      * @return void
      */
-    private function createLanguageTranslations(Language $language): void
+    private function createLanguageTranslations(Language $language, bool $default): void
     {
         $translations = $this->getLocaleTranslations($language->{Language::LOCALE});
 
         foreach ($translations as $key => $value)
         {
-            $translation = $this->getTranslation($key);
+            $translation = $this->getTranslation($key, $default ? $value : null);
             $translationValue = $this->getTranslationValue($language, $translation, $value);
         }
     }
@@ -189,20 +195,28 @@ class SyncTranslationsCommand extends Command
 
     /**
      * @param string $key
+     * @param string|null $value
      *
      * @return Translation
      */
-    private function getTranslation(string $key): Translation
+    private function getTranslation(string $key, string|null $value = null): Translation
     {
         $translation = $this->translations->get($key);
 
         if (!$translation)
         {
             $translation = Translation::create([
-                Translation::KEY => $key
+                Translation::DEFAULT_VALUE => $value,
+                Translation::KEY => $key,
             ]);
 
             $this->translations->put($key, $translation);
+        }
+        else if ($value)
+        {
+            $translation->update([
+                Translation::DEFAULT_VALUE => $value,
+            ]);
         }
 
         return $translation;
