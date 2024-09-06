@@ -23,14 +23,13 @@ class LanguageForm extends AbstractForm
     #region CONSTRUCTOR
 
     /**
+     * @param mixed $resource
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct(mixed $resource)
     {
-        parent::__construct(
-            slug: 'language',
-            title: 'Language',
-        );
+        parent::__construct($resource, 'Language', 'language');
     }
 
     #endregion
