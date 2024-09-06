@@ -40,7 +40,7 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 							onClick={() => setContextLocale(language.locale)}
 							key={language.locale}
 						>
-							{language.language}
+							{language.label}
 						</DropdownMenuItem>
 					);
 				})}
