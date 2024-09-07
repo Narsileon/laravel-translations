@@ -42,5 +42,12 @@ interface ITranslationRepository
      */
     public function getByKey(string $key): ?Translation;
 
+    /**
+     * @param Translation $translation
+     *
+     * @return void
+     */
+    public function put(Translation $translation): void;
+
     #endregion
 }

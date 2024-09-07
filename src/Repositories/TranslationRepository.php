@@ -94,5 +94,17 @@ final class TranslationRepository implements ITranslationRepository
         return $this->translationsByKey->get($key);
     }
 
+
+    /**
+     * @param Translation $translation
+     *
+     * @return void
+     */
+    public function put(Translation $translation): void
+    {
+        $this->translationsByKey->put($translation->{Translation::KEY}, $translation);
+        $this->translationsById->put($translation->{Translation::ID}, $translation);
+    }
+
     #endregion
 }

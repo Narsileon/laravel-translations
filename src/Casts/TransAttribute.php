@@ -115,6 +115,8 @@ final class TransAttribute implements CastsAttributes
             {
                 $translation = $this->createTranslation($value);
             }
+
+            static::$translationRepository->put($translation);
         }
         else
         {
@@ -126,6 +128,8 @@ final class TransAttribute implements CastsAttributes
             $translation = Translation::create([
                 Translation::DEFAULT_VALUE => $value,
             ]);
+
+            static::$translationRepository->put($translation);
         }
 
         return (string)($translation->{Translation::ID});
