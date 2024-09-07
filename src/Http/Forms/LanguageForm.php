@@ -9,6 +9,7 @@ use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
 use Narsil\Localization\Models\Language;
+use Narsil\Tables\Constants\Types;
 
 #endregion
 
@@ -47,6 +48,7 @@ class LanguageForm extends AbstractForm
                         ->maxLength(2)
                         ->required(),
                     (new FormString(Language::LABEL))
+                        ->type(Types::TRANS)
                         ->required(),
                 ]),
         ];

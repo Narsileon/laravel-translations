@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Narsil\Localization\Casts\TransAttribute;
 use Narsil\Localization\Interfaces\IHasTranslations;
 use Narsil\Localization\Traits\HasTranslations;
+use Narsil\Tables\Constants\Types;
 
 #endregion
 
@@ -34,7 +35,7 @@ class Language extends Model implements IHasTranslations
         $this->table = self::TABLE;
 
         $this->casts = [
-            self::ACTIVE => 'boolean',
+            self::ACTIVE => Types::BOOLEAN,
             self::LABEL => TransAttribute::class,
         ];
 

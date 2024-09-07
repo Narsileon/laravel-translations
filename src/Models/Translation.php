@@ -7,6 +7,7 @@ namespace Narsil\Localization\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Narsil\Tables\Constants\Types;
 
 #endregion
 
@@ -29,7 +30,7 @@ class Translation extends Model
         $this->table = self::TABLE;
 
         $this->casts = [
-            self::ACTIVE => 'boolean',
+            self::ACTIVE => Types::BOOLEAN,
         ];
 
         $this->fillable = [
