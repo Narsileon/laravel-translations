@@ -8,9 +8,9 @@ use Narsil\Forms\Builder\AbstractForm;
 use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
+use Narsil\Forms\Builder\Inputs\FormTrans;
 use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Models\TranslationValue;
-use Narsil\Tables\Constants\Types;
 
 #endregion
 
@@ -49,8 +49,7 @@ class TranslationForm extends AbstractForm
                         ->required(),
                     (new FormString(Translation::DEFAULT_VALUE))
                         ->required(),
-                    (new FormString(TranslationValue::VALUE))
-                        ->type(Types::TRANS)
+                    (new FormTrans(TranslationValue::VALUE))
                         ->required(),
                 ]),
         ];
