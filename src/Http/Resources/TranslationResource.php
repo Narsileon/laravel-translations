@@ -49,7 +49,7 @@ class TranslationResource extends JsonResource
 
         foreach ($this->values as $value)
         {
-            $values[$value->{TranslationValue::RELATIONSHIP_LANGUAGE}->{Language::LOCALE}] = $value->{TranslationValue::VALUE};
+            $values[$value->{TranslationValue::LANGUAGE_ID}] = $value->{TranslationValue::VALUE};
         }
 
         return $values;

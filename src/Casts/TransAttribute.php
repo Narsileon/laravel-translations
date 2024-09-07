@@ -6,6 +6,7 @@ namespace Narsil\Localization\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Narsil\Localization\Interfaces\ITranslationRepository;
 use Narsil\Localization\Models\Language;
@@ -92,7 +93,33 @@ final class TransAttribute implements CastsAttributes
             return $value;
         }
 
-        $translation = static::$translationRepository->getByKey($value);
+        $translation = null;
+
+        if (is_array($value))
+        {
+            if ($id = Arr::get($value, Translation::ID))
+            {
+                $translation = static::$translationRepository->getById($id);
+
+                if ($translation)
+                {
+                    $translation = $this->updateTranslation($translation, $value);
+                }
+                else
+                {
+                    $translation = $this->createTranslation($value);
+                }
+            }
+
+            else
+            {
+                $translation = $this->createTranslation($value);
+            }
+        }
+        else
+        {
+            $translation = static::$translationRepository->getByKey($value);
+        }
 
         if (!$translation)
         {
@@ -101,7 +128,44 @@ final class TransAttribute implements CastsAttributes
             ]);
         }
 
-        return (string)$translation->{Translation::ID};
+        return (string)($translation->{Translation::ID});
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
+
+    private function createTranslation(array $attributes): Translation
+    {
+        $translation = Translation::create([
+            Translation::DEFAULT_VALUE => Arr::get($attributes, Translation::DEFAULT_VALUE),
+        ]);
+
+        foreach (Arr::get($attributes, Translation::RELATIONSHIP_VALUES, []) as $key => $value)
+        {
+            TranslationValue::create([
+                TranslationValue::KEY_ID => $translation->{Translation::ID},
+                TranslationValue::LANGUAGE_ID => $key,
+                TranslationValue::VALUE => $value,
+            ]);
+        }
+
+        return $translation;
+    }
+
+    private function updateTranslation(Translation $translation, array $attributes): Translation
+    {
+        foreach (Arr::get($attributes, Translation::RELATIONSHIP_VALUES, []) as $key => $value)
+        {
+            TranslationValue::updateOrCreate([
+                TranslationValue::KEY_ID => $translation->{Translation::ID},
+                TranslationValue::LANGUAGE_ID => $key,
+            ], [
+                TranslationValue::VALUE => $value,
+            ]);
+        }
+
+        return $translation;
     }
 
     #endregion

@@ -14,9 +14,7 @@ export interface LanguageDropdownProps extends ButtonProps {
 }
 
 const LanguageDropdown = ({ children, className, languages, ...props }: LanguageDropdownProps) => {
-	const { trans } = useTranslationsStore();
-
-	const { contextLocale, setContextLocale } = useLanguageContext();
+	const { contextLanguage, setContextLanguage } = useLanguageContext();
 
 	return (
 		<DropdownMenu>
@@ -28,7 +26,7 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 					className={cn("gap-x-1", className)}
 					{...props}
 				>
-					{trans(contextLocale)}
+					{contextLanguage.label}
 					<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 				</Button>
 			</DropdownMenuTrigger>
@@ -36,8 +34,8 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 				{languages.map((language) => {
 					return (
 						<DropdownMenuItem
-							active={language.locale === contextLocale}
-							onClick={() => setContextLocale(language.locale)}
+							active={language.locale === contextLanguage.locale}
+							onClick={() => setContextLanguage(language)}
 							key={language.locale}
 						>
 							{language.label}

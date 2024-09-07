@@ -10,7 +10,6 @@ use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
 use Narsil\Forms\Builder\Inputs\FormTrans;
 use Narsil\Localization\Models\Language;
-use Narsil\Tables\Constants\Types;
 
 #endregion
 
