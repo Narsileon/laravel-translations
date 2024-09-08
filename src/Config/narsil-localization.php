@@ -25,5 +25,7 @@ return [
     |
     */
 
-    'translations' => [],
+    'translations' => [
+        'localization::locales',
+    ],
 ];
