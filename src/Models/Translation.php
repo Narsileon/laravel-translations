@@ -4,13 +4,16 @@ namespace Narsil\Localization\Models;
 
 #region USE
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Narsil\Localization\Observers\TranslationObserver;
 use Narsil\Tables\Constants\Types;
 
 #endregion
 
+#[ObservedBy([TranslationObserver::class])]
 /**
  * @version 1.0.0
  *
