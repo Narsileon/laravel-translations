@@ -5,7 +5,6 @@ namespace Narsil\Localization\Observers;
 #region USE
 
 use Illuminate\Support\Arr;
-use Narsil\Localization\Interfaces\IHasTranslations;
 use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Models\TranslationValue;
 
@@ -27,7 +26,7 @@ class TranslationObserver
      */
     public function saved(Translation $translation): void
     {
-        $attributes = request()->get(IHasTranslations::ATTRIBUTE_TRANSLATIONS . '.' . Translation::RELATIONSHIP_VALUES . '.' . Translation::RELATIONSHIP_VALUES, []);
+        $attributes = request()->input(Translation::RELATIONSHIP_VALUES . '.' . Translation::RELATIONSHIP_VALUES, []);
 
         foreach ($attributes as $key => $value)
         {
@@ -47,7 +46,7 @@ class TranslationObserver
      */
     public function saving(Translation $translation): void
     {
-        $attributes = request()->get(IHasTranslations::ATTRIBUTE_TRANSLATIONS . '.' . Translation::RELATIONSHIP_VALUES, []);
+        $attributes = request()->input(Translation::RELATIONSHIP_VALUES, []);
 
         if ($defaultValue = Arr::get($attributes, Translation::DEFAULT_VALUE))
         {
