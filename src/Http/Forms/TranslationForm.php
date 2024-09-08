@@ -4,6 +4,7 @@ namespace Narsil\Localization\Http\Forms;
 
 #region USE
 
+use Illuminate\Http\Request;
 use Narsil\Forms\Builder\AbstractForm;
 use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
@@ -31,6 +32,27 @@ class TranslationForm extends AbstractForm
     public function __construct(mixed $resource)
     {
         parent::__construct($resource, 'Translation', 'translation');
+    }
+
+    #endregion
+
+    #region PUBLIC METHODS
+
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function toArray(Request $request): array
+    {
+        $attributes = parent::toArray($request);
+
+        $attributes[Translation::RELATIONSHIP_VALUES] = $this->{Translation::RELATIONSHIP_VALUES}->pluck(
+            TranslationValue::VALUE,
+            TranslationValue::LANGUAGE_ID
+        );
+
+        return $attributes;
     }
 
     #endregion
