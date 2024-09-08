@@ -10,6 +10,7 @@ import DropdownMenuContent from "@narsil-ui/Components/DropdownMenu/DropdownMenu
 import DropdownMenuItem from "@narsil-ui/Components/DropdownMenu/DropdownMenuItem";
 import DropdownMenuTrigger from "@narsil-ui/Components/DropdownMenu/DropdownMenuTrigger";
 import TooltipWrapper from "@narsil-ui/Components/Tooltip/TooltipWrapper";
+import DropdownMenuSeparator from "@narsil-ui/Components/DropdownMenu/DropdownMenuSeparator";
 
 export interface LanguageDropdownProps extends ButtonProps {
 	languages: LanguageModel[];
@@ -24,7 +25,7 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 
 	return (
 		<DropdownMenu>
-			<TooltipWrapper tooltip={contextLanguage?.label ?? standardLabel}>
+			<TooltipWrapper tooltip={`${trans("language")} - ${contextLanguage?.label ?? standardLabel}`}>
 				<DropdownMenuTrigger
 					className='group'
 					asChild={true}
@@ -52,6 +53,7 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 				>
 					{standardLabel}
 				</DropdownMenuItem>
+				<DropdownMenuSeparator />
 				{languages.map((language) => {
 					return (
 						<DropdownMenuItem

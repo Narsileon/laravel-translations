@@ -22,7 +22,7 @@ const AppLanguage = ({ chevron = false, children, className, languages, short = 
 
 	return (
 		<DropdownMenu>
-			<TooltipWrapper tooltip={trans("language")}>
+			<TooltipWrapper tooltip={`${trans("language")} - ${trans(`locales.${locale}`)}}`}>
 				<DropdownMenuTrigger
 					className='group'
 					asChild={true}
