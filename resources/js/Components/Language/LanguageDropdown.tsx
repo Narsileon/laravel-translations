@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import { cn } from "@narsil-ui/Components";
 import { LanguageModel } from "@narsil-localization/Types";
 import { upperCase } from "lodash";
@@ -29,7 +28,6 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 						{...props}
 					>
 						{upperCase(contextLanguage.locale)}
-						<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 					</Button>
 				</DropdownMenuTrigger>
 			</TooltipWrapper>
