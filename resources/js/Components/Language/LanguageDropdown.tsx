@@ -25,6 +25,7 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 				>
 					<Button
 						className={cn("gap-x-1", className)}
+						size='icon'
 						{...props}
 					>
 						{upperCase(contextLanguage.locale)}
