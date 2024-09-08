@@ -1,7 +1,9 @@
 import { cn } from "@narsil-ui/Components";
+import { Globe } from "lucide-react";
 import { LanguageModel } from "@narsil-localization/Types";
 import { upperCase } from "lodash";
 import { useLanguageContext } from "./LanguageProvider";
+import { useTranslationsStore } from "@narsil-localization/Stores/translationStore";
 import Button, { ButtonProps } from "@narsil-ui/Components/Button/Button";
 import DropdownMenu from "@narsil-ui/Components/DropdownMenu/DropdownMenu";
 import DropdownMenuContent from "@narsil-ui/Components/DropdownMenu/DropdownMenuContent";
@@ -14,11 +16,15 @@ export interface LanguageDropdownProps extends ButtonProps {
 }
 
 const LanguageDropdown = ({ children, className, languages, ...props }: LanguageDropdownProps) => {
+	const { trans } = useTranslationsStore();
+
 	const { contextLanguage, setContextLanguage } = useLanguageContext();
+
+	const standardLabel = trans("Default");
 
 	return (
 		<DropdownMenu>
-			<TooltipWrapper tooltip={contextLanguage.label}>
+			<TooltipWrapper tooltip={contextLanguage?.label ?? standardLabel}>
 				<DropdownMenuTrigger
 					className='group'
 					asChild={true}
@@ -28,15 +34,28 @@ const LanguageDropdown = ({ children, className, languages, ...props }: Language
 						size='icon'
 						{...props}
 					>
-						{upperCase(contextLanguage.locale)}
+						{contextLanguage ? (
+							upperCase(contextLanguage.locale)
+						) : (
+							<>
+								<Globe className='h-6 w-6' />
+								<span className='sr-only'>{standardLabel}</span>
+							</>
+						)}
 					</Button>
 				</DropdownMenuTrigger>
 			</TooltipWrapper>
 			<DropdownMenuContent>
+				<DropdownMenuItem
+					active={!contextLanguage}
+					onClick={() => setContextLanguage(null)}
+				>
+					{standardLabel}
+				</DropdownMenuItem>
 				{languages.map((language) => {
 					return (
 						<DropdownMenuItem
-							active={language.locale === contextLanguage.locale}
+							active={language.locale === contextLanguage?.locale}
 							onClick={() => setContextLanguage(language)}
 							key={language.locale}
 						>

@@ -32,7 +32,7 @@ const AppLanguage = ({ chevron = false, children, className, languages, short = 
 						{...props}
 					>
 						{children}
-						{short ? upperCase(locale) : trans(locale)}
+						{short ? upperCase(locale) : trans(`locales.${locale}`)}
 						{chevron ? (
 							<ChevronDown className='h-5 w-5 transition-transform duration-200 group-aria-expanded:rotate-180' />
 						) : null}

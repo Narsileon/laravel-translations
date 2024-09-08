@@ -1,7 +1,5 @@
 {
-	"de": "German",
-	"en": "English",
-	"fr": "Français",
+	"Default": "Default",
 	"Language": "Language",
 	"Languages": "Languages",
 	"Translation": "Translation",
