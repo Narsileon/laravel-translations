@@ -10,8 +10,9 @@ use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
 use Narsil\Forms\Builder\Inputs\FormTrans;
+use Narsil\Localization\Http\Resources\TranslationResource;
+use Narsil\Localization\Interfaces\IHasTranslations;
 use Narsil\Localization\Models\Translation;
-use Narsil\Localization\Models\TranslationValue;
 
 #endregion
 
@@ -47,10 +48,11 @@ class TranslationForm extends AbstractForm
     {
         $attributes = parent::toArray($request);
 
-        $attributes[Translation::RELATIONSHIP_VALUES] = $this->{Translation::RELATIONSHIP_VALUES}->pluck(
-            TranslationValue::VALUE,
-            TranslationValue::LANGUAGE_ID
-        );
+        $attributes[IHasTranslations::ATTRIBUTE_TRANSLATIONS] = [
+            Translation::RELATIONSHIP_VALUES => new TranslationResource($this),
+        ];
+
+        $attributes[Translation::RELATIONSHIP_VALUES] = null;
 
         return $attributes;
     }
@@ -69,9 +71,8 @@ class TranslationForm extends AbstractForm
                 ->children([
                     (new FormString(Translation::KEY))
                         ->required(),
-                    (new FormString(Translation::DEFAULT_VALUE))
-                        ->required(),
-                    (new FormTrans(TranslationValue::VALUE))
+                    (new FormTrans(Translation::RELATIONSHIP_VALUES))
+                        ->label('validation.attributes.value')
                         ->required(),
                 ]),
         ];
