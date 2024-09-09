@@ -17,36 +17,40 @@
 	],
 	"repositories": [
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-forms.git"
+			"type": "path",
+			"url": "../narsil-auth"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-menus.git"
+			"type": "path",
+			"url": "../narsil-forms"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-policies.git"
-		},
-        		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-settings.git"
+			"type": "path",
+			"url": "../narsil-menus"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-storage.git"
-		},
-        		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-table.git"
+			"type": "path",
+			"url": "../narsil-policies"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-tree.git"
+			"type": "path",
+			"url": "../narsil-settings"
 		},
 		{
-			"type": "vcs",
-			"url": "git@github.com:Narsileon/narsil-ui.git"
+			"type": "path",
+			"url": "../narsil-storage"
+		},
+		{
+			"type": "path",
+			"url": "../narsil-tables"
+		},
+		{
+			"type": "path",
+			"url": "../narsil-tree"
+		},
+		{
+			"type": "path",
+			"url": "../narsil-ui"
 		}
 	],
 	"require": {
@@ -55,8 +59,8 @@
 		"narsil/forms": "dev-main",
 		"narsil/menus": "dev-main",
 		"narsil/policies": "dev-main",
-        "narsil/settings": "dev-main",
-        "narsil/ui": "dev-main"
+		"narsil/settings": "dev-main",
+		"narsil/ui": "dev-main"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^11.0"
