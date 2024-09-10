@@ -159,6 +159,10 @@ final class TransAttribute implements CastsAttributes
 
     private function updateTranslation(Translation $translation, array $attributes): Translation
     {
+        $translation->update([
+            Translation::DEFAULT_VALUE => Arr::get($attributes, Translation::DEFAULT_VALUE),
+        ]);
+
         foreach (Arr::get($attributes, Translation::RELATIONSHIP_VALUES, []) as $key => $value)
         {
             TranslationValue::updateOrCreate([

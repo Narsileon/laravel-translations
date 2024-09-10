@@ -17,40 +17,40 @@
 	],
 	"repositories": [
 		{
-			"type": "path",
-			"url": "../narsil-auth"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-auth.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-forms"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-forms.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-menus"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-menus.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-policies"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-policies.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-settings"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-settings.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-storage"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-storage.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-tables"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-tables.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-tree"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-tree.git"
 		},
 		{
-			"type": "path",
-			"url": "../narsil-ui"
+			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-ui.git"
 		}
 	],
 	"require": {
