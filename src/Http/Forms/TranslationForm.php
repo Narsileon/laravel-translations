@@ -69,8 +69,7 @@ class TranslationForm extends AbstractForm
         return [
             (new FormCard('default'))
                 ->children([
-                    (new FormString(Translation::KEY))
-                        ->required(),
+                    (new FormString(Translation::KEY)),
                     (new FormTrans(Translation::RELATIONSHIP_VALUES))
                         ->label('validation.attributes.value')
                         ->required(),
