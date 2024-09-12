@@ -46,6 +46,10 @@
 		},
 		{
 			"type": "vcs",
+			"url": "git@github.com:Narsileon/narsil-tiptap.git"
+		},
+		{
+			"type": "vcs",
 			"url": "git@github.com:Narsileon/narsil-tree.git"
 		},
 		{

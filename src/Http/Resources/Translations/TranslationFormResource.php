@@ -1,16 +1,15 @@
 <?php
 
-namespace Narsil\Localization\Http\Forms;
+namespace Narsil\Localization\Http\Resources\Translations;
 
 #region USE
 
 use Illuminate\Http\Request;
-use Narsil\Forms\Builder\AbstractForm;
 use Narsil\Forms\Builder\AbstractFormNode;
 use Narsil\Forms\Builder\Elements\FormCard;
 use Narsil\Forms\Builder\Inputs\FormString;
 use Narsil\Forms\Builder\Inputs\FormTrans;
-use Narsil\Localization\Http\Resources\TranslationResource;
+use Narsil\Forms\Http\Resources\AbstractFormResource;
 use Narsil\Localization\Interfaces\IHasTranslations;
 use Narsil\Localization\Models\Translation;
 
@@ -21,7 +20,7 @@ use Narsil\Localization\Models\Translation;
  *
  * @author Jonathan Rigaux
  */
-class TranslationForm extends AbstractForm
+class TranslationFormResource extends AbstractFormResource
 {
     #region CONSTRUCTOR
 

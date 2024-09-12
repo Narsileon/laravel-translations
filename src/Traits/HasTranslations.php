@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Narsil\Localization\Casts\TransAttribute;
-use Narsil\Localization\Http\Resources\TranslationResource;
+use Narsil\Localization\Http\Resources\Translations\TranslationResource;
 use Narsil\Localization\Models\Translation;
 
 #endregion

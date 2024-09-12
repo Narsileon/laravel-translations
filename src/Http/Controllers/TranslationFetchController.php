@@ -7,7 +7,7 @@ namespace Narsil\Localization\Http\Controllers;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Narsil\Localization\Http\Requests\FetchRequest;
-use Narsil\Localization\Http\Resources\TranslationResource;
+use Narsil\Localization\Http\Resources\Translations\TranslationResource;
 use Narsil\Localization\Models\Language;
 use Narsil\Localization\Models\Translation;
 use Narsil\Localization\Models\TranslationValue;
